@@ -24,6 +24,7 @@
       font-family: "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
       color: #333;
       line-height: 1.6;
+      background: var(--primary);
     }
 
     /* Nav */
@@ -31,7 +32,7 @@
       position: fixed;
       top: 0;
       width: 100%;
-      padding: 1rem 2rem;
+      padding: 1rem 3rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -159,21 +160,95 @@
       filter: brightness(0.95) contrast(1.05);
     }
 
-    /* Sections */
-    section {
-      padding: 5rem 2rem;
-      max-width: 1000px;
+    /* Services - dark theme continuing from hero */
+    #services {
+      background: linear-gradient(180deg, #1a3350 0%, var(--primary) 100%);
+      padding: 5rem 3rem;
+      max-width: none;
+    }
+
+    #services > .section-inner {
+      max-width: 1200px;
       margin: 0 auto;
     }
 
-    section h2 {
+    #services h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #fff;
+      text-align: center;
+    }
+
+    #services h2::after {
+      content: "";
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: var(--warm);
+      margin: 0.8rem auto 0;
+      border-radius: 2px;
+    }
+
+    #services .section-desc {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 3rem;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .service-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: transform 0.2s, background 0.2s;
+      backdrop-filter: blur(4px);
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      background: rgba(255,255,255,0.1);
+    }
+
+    .service-card .icon {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .service-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.5rem;
+      color: var(--warm-light);
+    }
+
+    .service-card p { color: rgba(255,255,255,0.6); font-size: 0.9rem; line-height: 1.7; }
+
+    /* About */
+    #about {
+      background: var(--light);
+      padding: 5rem 3rem;
+      max-width: none;
+    }
+
+    #about > .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    #about h2 {
       font-size: 2rem;
       margin-bottom: 1rem;
       color: var(--primary);
       text-align: center;
     }
 
-    section h2::after {
+    #about h2::after {
       content: "";
       display: block;
       width: 60px;
@@ -183,55 +258,16 @@
       border-radius: 2px;
     }
 
-    .section-desc {
+    #about .section-desc {
       text-align: center;
       max-width: 600px;
       margin: 0 auto 3rem;
-      color: #666;
+      color: #888;
     }
-
-    /* Services */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-    }
-
-    .service-card {
-      background: #fff;
-      border-radius: 12px;
-      padding: 2rem;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-      transition: transform 0.2s, box-shadow 0.2s;
-      border-top: 3px solid transparent;
-    }
-
-    .service-card:hover {
-      transform: translateY(-4px);
-      border-top-color: var(--denim);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-    }
-
-    .service-card .icon {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .service-card h3 {
-      font-size: 1.2rem;
-      margin-bottom: 0.5rem;
-      color: var(--primary);
-    }
-
-    .service-card p { color: #666; font-size: 0.95rem; }
-
-    /* About */
-    #about { background: var(--light); padding: 5rem 2rem; max-width: none; }
-    #about > div { max-width: 1000px; margin: 0 auto; }
 
     .about-content {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1.2fr 1fr;
       gap: 3rem;
       align-items: center;
     }
@@ -246,7 +282,7 @@
 
     .stat {
       text-align: center;
-      padding: 1.5rem;
+      padding: 1.5rem 1rem;
       background: #fff;
       border-radius: 12px;
       box-shadow: 0 2px 12px rgba(0,0,0,0.06);
@@ -261,11 +297,46 @@
     .stat .label { font-size: 0.85rem; color: #888; margin-top: 0.3rem; }
 
     /* Contact */
+    #contact {
+      background: var(--primary);
+      padding: 5rem 3rem;
+      max-width: none;
+    }
+
+    #contact > .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    #contact h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #fff;
+      text-align: center;
+    }
+
+    #contact h2::after {
+      content: "";
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: var(--warm);
+      margin: 0.8rem auto 0;
+      border-radius: 2px;
+    }
+
+    #contact .section-desc {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 3rem;
+      color: rgba(255,255,255,0.6);
+    }
+
     .contact-info { text-align: center; }
-    .contact-info p { margin-bottom: 0.8rem; color: #555; }
+    .contact-info p { margin-bottom: 0.8rem; color: rgba(255,255,255,0.7); }
 
     .contact-info a {
-      color: var(--denim);
+      color: var(--warm-light);
       text-decoration: none;
       font-weight: 600;
     }
@@ -282,37 +353,45 @@
       align-items: center;
       gap: 0.5rem;
       padding: 0.7rem 1.5rem;
-      border: 2px solid var(--accent2);
+      border: 2px solid rgba(255,255,255,0.2);
       border-radius: 50px;
-      color: var(--accent2);
+      color: rgba(255,255,255,0.8);
       text-decoration: none;
       font-weight: 600;
       transition: all 0.2s;
     }
 
     .contact-links a:hover {
-      background: var(--accent2);
+      background: var(--warm);
+      border-color: var(--warm);
       color: #fff;
     }
 
     /* Footer */
     footer {
       text-align: center;
-      padding: 2rem;
-      background: var(--primary);
-      color: rgba(255,255,255,0.5);
+      padding: 2rem 3rem;
+      background: #141f2e;
+      color: rgba(255,255,255,0.35);
       font-size: 0.85rem;
     }
 
     /* Responsive */
     @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
       nav ul { display: none; }
       .hero { grid-template-columns: 1fr; }
       .hero-text { padding: 7rem 2rem 3rem; text-align: center; align-items: center; }
       .hero-visual { height: 50vh; }
       .hero-visual::before { display: none; }
+      #services, #about, #contact { padding: 4rem 1.5rem; }
+      .services-grid { grid-template-columns: 1fr; }
       .about-content { grid-template-columns: 1fr; }
       .contact-links { flex-direction: column; align-items: center; }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .services-grid { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
@@ -339,44 +418,46 @@
   </section>
 
   <section id="services">
-    <h2>Our Services</h2>
-    <p class="section-desc">我們專注於偶像活動的企劃、主辦與海外代理，為粉絲打造最頂級的應援體驗。</p>
-    <div class="services-grid">
-      <div class="service-card">
-        <div class="icon">🎤</div>
-        <h3>活動主辦</h3>
-        <p>從演唱會、見面會到粉絲祭典，我們提供完整的活動企劃與執行服務，打造難忘的現場體驗。</p>
-      </div>
-      <div class="service-card">
-        <div class="icon">🌏</div>
-        <h3>海外代理</h3>
-        <p>作為偶像活動的海外代理，我們將日本最熱門的偶像文化帶到台灣及亞洲各地。</p>
-      </div>
-      <div class="service-card">
-        <div class="icon">✈️</div>
-        <h3>遠征團企劃</h3>
-        <p>規劃完整的海外應援遠征行程，包含門票代購、交通住宿安排，讓你輕鬆追星無煩惱。</p>
-      </div>
-      <div class="service-card">
-        <div class="icon">🎨</div>
-        <h3>周邊企劃製作</h3>
-        <p>從設計到生產，為活動量身打造高品質限定周邊商品，提升粉絲收藏價值。</p>
-      </div>
-      <div class="service-card">
-        <div class="icon">📱</div>
-        <h3>社群經營</h3>
-        <p>協助偶像與粉絲社群的經營管理，建立緊密的互動連結與品牌形象。</p>
-      </div>
-      <div class="service-card">
-        <div class="icon">🤝</div>
-        <h3>商業合作媒合</h3>
-        <p>媒合偶像與品牌的商業合作機會，從代言到聯名企劃，創造雙贏價值。</p>
+    <div class="section-inner">
+      <h2>Our Services</h2>
+      <p class="section-desc">我們專注於偶像活動的企劃、主辦與海外代理，為粉絲打造最頂級的應援體驗。</p>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="icon">🎤</div>
+          <h3>活動主辦</h3>
+          <p>從演唱會、見面會到粉絲祭典，我們提供完整的活動企劃與執行服務，打造難忘的現場體驗。</p>
+        </div>
+        <div class="service-card">
+          <div class="icon">🌏</div>
+          <h3>海外代理</h3>
+          <p>作為偶像活動的海外代理，我們將日本最熱門的偶像文化帶到台灣及亞洲各地。</p>
+        </div>
+        <div class="service-card">
+          <div class="icon">✈️</div>
+          <h3>遠征團企劃</h3>
+          <p>規劃完整的海外應援遠征行程，包含門票代購、交通住宿安排，讓你輕鬆追星無煩惱。</p>
+        </div>
+        <div class="service-card">
+          <div class="icon">🎨</div>
+          <h3>周邊企劃製作</h3>
+          <p>從設計到生產，為活動量身打造高品質限定周邊商品，提升粉絲收藏價值。</p>
+        </div>
+        <div class="service-card">
+          <div class="icon">📱</div>
+          <h3>社群經營</h3>
+          <p>協助偶像與粉絲社群的經營管理，建立緊密的互動連結與品牌形象。</p>
+        </div>
+        <div class="service-card">
+          <div class="icon">🤝</div>
+          <h3>商業合作媒合</h3>
+          <p>媒合偶像與品牌的商業合作機會，從代言到聯名企劃，創造雙贏價值。</p>
+        </div>
       </div>
     </div>
   </section>
 
   <section id="about">
-    <div>
+    <div class="section-inner">
       <h2>About Us</h2>
       <p class="section-desc">以熱情驅動，用專業實現，讓每一場偶像活動都值得 Priority Boarding。</p>
       <div class="about-content">
@@ -408,14 +489,16 @@
   </section>
 
   <section id="contact">
-    <h2>Contact Us</h2>
-    <p class="section-desc">有任何活動合作、代理洽談或遠征團需求，歡迎隨時與我們聯繫。</p>
-    <div class="contact-info">
-      <p>Email: <a href="mailto:hello@ahdpb.com">hello@ahdpb.com</a></p>
-      <div class="contact-links">
-        <a href="#">𝕏 Twitter</a>
-        <a href="#">Instagram</a>
-        <a href="#">Facebook</a>
+    <div class="section-inner">
+      <h2>Contact Us</h2>
+      <p class="section-desc">有任何活動合作、代理洽談或遠征團需求，歡迎隨時與我們聯繫。</p>
+      <div class="contact-info">
+        <p>Email: <a href="mailto:hello@ahdpb.com">hello@ahdpb.com</a></p>
+        <div class="contact-links">
+          <a href="#">𝕏 Twitter</a>
+          <a href="#">Instagram</a>
+          <a href="#">Facebook</a>
+        </div>
       </div>
     </div>
   </section>

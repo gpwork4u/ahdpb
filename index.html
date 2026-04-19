@@ -196,72 +196,148 @@
 
     /* Services */
     #services {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       background: linear-gradient(180deg, #1a3350 0%, var(--primary) 100%);
-      padding: 5rem 3rem;
       max-width: none;
+      padding: 0;
+      overflow: hidden;
     }
 
-    #services > .section-inner {
-      max-width: 1200px;
-      margin: 0 auto;
+    .services-text-side {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 3rem 4rem;
     }
 
-    #services h2 {
+    .services-text-side h2 {
       font-size: 2rem;
       margin-bottom: 1rem;
       color: #fff;
-      text-align: center;
     }
 
-    #services h2::after {
+    .services-text-side h2::after {
       content: "";
       display: block;
       width: 60px;
       height: 3px;
       background: var(--warm);
-      margin: 0.8rem auto 0;
+      margin: 0.8rem 0 0;
       border-radius: 2px;
     }
 
-    #services .section-desc {
-      text-align: center;
-      max-width: 600px;
-      margin: 0 auto 3rem;
-      color: rgba(255,255,255,0.6);
+    .services-visual {
+      position: relative;
+      overflow: hidden;
     }
 
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
+    .services-visual::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 120px;
+      background: linear-gradient(to right, var(--primary), transparent);
+      z-index: 2;
     }
 
-    .service-card {
+    .services-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      filter: brightness(0.9) contrast(1.05);
+    }
+
+    .slider {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+    }
+
+    .slider-track {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .slide {
+      min-width: 100%;
       background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 16px;
-      padding: 2rem;
-      transition: transform 0.2s, background 0.2s;
+      padding: 3rem 4rem;
       backdrop-filter: blur(4px);
+      text-align: center;
     }
 
-    .service-card:hover {
-      transform: translateY(-4px);
-      background: rgba(255,255,255,0.1);
+    .slide .icon {
+      font-size: 3rem;
+      margin-bottom: 1.2rem;
     }
 
-    .service-card .icon {
-      font-size: 2.2rem;
+    .slide h3 {
+      font-size: 1.5rem;
       margin-bottom: 1rem;
-    }
-
-    .service-card h3 {
-      font-size: 1.15rem;
-      margin-bottom: 0.5rem;
       color: var(--warm-light);
     }
 
-    .service-card p { color: rgba(255,255,255,0.6); font-size: 0.9rem; line-height: 1.7; }
+    .slide p {
+      color: rgba(255,255,255,0.65);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .slider-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .slider-btn {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slider-btn:hover {
+      background: var(--warm);
+      border-color: var(--warm);
+    }
+
+    .slider-dots {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .slider-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .slider-dot.active {
+      background: var(--warm);
+      transform: scale(1.2);
+    }
 
     /* About */
     #about {
@@ -405,8 +481,11 @@
       .hero-text { padding: 7rem 2rem 3rem; text-align: center; align-items: center; }
       .hero-visual { height: 50vh; }
       .hero-visual::before { display: none; }
-      #services, #about, #contact { padding: 4rem 1.5rem; }
-      .services-grid { grid-template-columns: 1fr; }
+      #contact { padding: 4rem 1.5rem; }
+      #services { grid-template-columns: 1fr; }
+      .services-visual { height: 50vh; }
+      .services-visual::before { display: none; }
+      .services-text-side { padding: 3rem 1.5rem; }
       #about { grid-template-columns: 1fr; }
       .about-visual { min-height: 50vh; }
       .about-visual::before { display: none; }
@@ -414,7 +493,6 @@
     }
 
     @media (min-width: 769px) and (max-width: 1024px) {
-      .services-grid { grid-template-columns: 1fr 1fr; }
       #about { grid-template-columns: 1fr 1fr; }
       .about-visual { min-height: 400px; }
     }
@@ -496,93 +574,63 @@
   </section>
 
   <section id="services">
-    <div class="section-inner">
+    <div class="services-text-side">
       <h2>Our Services</h2>
-      <p class="section-desc">
-        <span class="lang-zh">我們專注於偶像活動的企劃、主辦與海外代理，為粉絲打造最頂級的應援體驗。</span>
-        <span class="lang-ja">アイドルイベントの企画・主催・海外エージェントに特化し、ファンに最高の応援体験を提供します。</span>
-        <span class="lang-en">We specialize in idol event planning, hosting, and overseas agency, delivering premium fan experiences.</span>
-      </p>
-      <div class="services-grid">
-        <div class="service-card">
-          <div class="icon">🎤</div>
-          <h3>
-            <span class="lang-zh">活動主辦</span>
-            <span class="lang-ja">イベント主催</span>
-            <span class="lang-en">Event Production</span>
-          </h3>
-          <p>
-            <span class="lang-zh">從演唱會、見面會到粉絲祭典，提供完整的活動企劃與執行服務。</span>
-            <span class="lang-ja">コンサート、ファンミーティング、ファン祭りまで、企画から運営まで一貫サービス。</span>
-            <span class="lang-en">From concerts and fan meetings to fan festivals, full event planning and execution.</span>
-          </p>
-        </div>
-        <div class="service-card">
-          <div class="icon">🌏</div>
-          <h3>
-            <span class="lang-zh">海外代理</span>
-            <span class="lang-ja">海外エージェント</span>
-            <span class="lang-en">Overseas Agency</span>
-          </h3>
-          <p>
-            <span class="lang-zh">將日本最熱門的偶像文化帶到台灣及亞洲各地。</span>
-            <span class="lang-ja">日本で最も人気のあるアイドル文化を台湾やアジア各地へ届けます。</span>
-            <span class="lang-en">Bringing Japan's hottest idol culture to Taiwan and across Asia.</span>
-          </p>
-        </div>
-        <div class="service-card">
-          <div class="icon">✈️</div>
-          <h3>
-            <span class="lang-zh">遠征團企劃</span>
-            <span class="lang-ja">遠征ツアー企画</span>
-            <span class="lang-en">Fan Tour Planning</span>
-          </h3>
-          <p>
-            <span class="lang-zh">規劃完整的海外應援遠征行程，門票代購、交通住宿一站搞定。</span>
-            <span class="lang-ja">チケット代行購入、交通・宿泊手配を含む海外遠征ツアーの企画。</span>
-            <span class="lang-en">Complete overseas fan tour packages with tickets, transport, and accommodation.</span>
-          </p>
-        </div>
-        <div class="service-card">
-          <div class="icon">🎨</div>
-          <h3>
-            <span class="lang-zh">周邊企劃製作</span>
-            <span class="lang-ja">グッズ企画制作</span>
-            <span class="lang-en">Merchandise Production</span>
-          </h3>
-          <p>
-            <span class="lang-zh">為活動量身打造高品質限定周邊商品。</span>
-            <span class="lang-ja">イベント限定の高品質オリジナルグッズを制作。</span>
-            <span class="lang-en">Custom high-quality exclusive merchandise for events.</span>
-          </p>
-        </div>
-        <div class="service-card">
-          <div class="icon">📱</div>
-          <h3>
-            <span class="lang-zh">社群經營</span>
-            <span class="lang-ja">SNS運営</span>
-            <span class="lang-en">Community Management</span>
-          </h3>
-          <p>
-            <span class="lang-zh">偶像與粉絲社群的經營管理，建立緊密的互動連結。</span>
-            <span class="lang-ja">アイドルとファンコミュニティの運営管理、密接な交流の構築。</span>
-            <span class="lang-en">Managing idol-fan communities and building strong engagement.</span>
-          </p>
-        </div>
-        <div class="service-card">
-          <div class="icon">🤝</div>
-          <h3>
-            <span class="lang-zh">商業合作媒合</span>
-            <span class="lang-ja">ビジネスマッチング</span>
-            <span class="lang-en">Business Matching</span>
-          </h3>
-          <p>
-            <span class="lang-zh">媒合偶像與品牌的商業合作，從代言到聯名企劃。</span>
-            <span class="lang-ja">アイドルとブランドのビジネスコラボ、エンドースメントからコラボ企画まで。</span>
-            <span class="lang-en">Matching idols with brands for endorsements and collaborations.</span>
-          </p>
+      <div class="slider">
+        <div class="slider-track" id="sliderTrack">
+          <div class="slide">
+            <div class="icon">✈️</div>
+            <h3>
+              <span class="lang-zh">海外公演招致</span>
+              <span class="lang-ja">海外公演招致</span>
+              <span class="lang-en">Overseas Performance Booking</span>
+            </h3>
+            <p>
+              <span class="lang-zh">與日本事務所交涉，將偶像帶來台灣舉辦演唱會、見面會與特別活動。從企劃、場地到執行，我們一手包辦，讓每一場公演都值得被記住。</span>
+              <span class="lang-ja">日本の事務所と交渉し、アイドルを台湾に招致してコンサート、ファンミーティング、特別イベントを開催。企画から会場手配、運営まで一貫して対応します。</span>
+              <span class="lang-en">We negotiate with Japanese agencies to bring idols to Taiwan for concerts, fan meetings, and special events. From planning to venue to execution, we handle everything.</span>
+            </p>
+          </div>
+          <div class="slide">
+            <div class="icon">🎌</div>
+            <h3>
+              <span class="lang-zh">遠征應援團</span>
+              <span class="lang-ja">遠征応援ツアー</span>
+              <span class="lang-en">Fan Tour Expeditions</span>
+            </h3>
+            <p>
+              <span class="lang-zh">帶著粉絲飛往日本現場應援。門票搶購、交通住宿、應援物資，所有細節都幫你安排好，你只需要帶上你的熱情。</span>
+              <span class="lang-ja">ファンと一緒に日本の現場へ。チケット確保、交通・宿泊手配、応援グッズまで全てお任せ。あなたは情熱だけ持ってきてください。</span>
+              <span class="lang-en">We take fans to Japan for live events. Tickets, transport, accommodation, fan goods — we handle every detail. Just bring your passion.</span>
+            </p>
+          </div>
+          <div class="slide">
+            <div class="icon">💫</div>
+            <h3>
+              <span class="lang-zh">應援企劃與周邊</span>
+              <span class="lang-ja">応援企画＆グッズ</span>
+              <span class="lang-en">Fan Projects & Merchandise</span>
+            </h3>
+            <p>
+              <span class="lang-zh">設計製作限定應援周邊、策劃花牆與應援企劃，用最有溫度的方式傳遞粉絲的心意，讓偶像感受到來自海外的愛。</span>
+              <span class="lang-ja">限定応援グッズの制作、フラワースタンドや応援企画のプロデュース。心のこもった形で、海外ファンの想いをアイドルに届けます。</span>
+              <span class="lang-en">We create exclusive fan merchandise, flower walls, and fan projects — heartfelt ways to show idols the love from fans overseas.</span>
+            </p>
+          </div>
         </div>
       </div>
+      <div class="slider-controls">
+        <button class="slider-btn" onclick="moveSlide(-1)">&#8592;</button>
+        <div class="slider-dots">
+          <button class="slider-dot active" onclick="goSlide(0)"></button>
+          <button class="slider-dot" onclick="goSlide(1)"></button>
+          <button class="slider-dot" onclick="goSlide(2)"></button>
+        </div>
+        <button class="slider-btn" onclick="moveSlide(1)">&#8594;</button>
+      </div>
+    </div>
+    <div class="services-visual">
+      <img src="https://seigura.com/wp-content/uploads/2023/12/MG_3451.jpg" alt="Aoki Hina">
     </div>
   </section>
 
@@ -618,6 +666,28 @@
         ));
       });
     }
+
+    let currentSlide = 0;
+    const totalSlides = 3;
+
+    function updateSlider() {
+      document.getElementById('sliderTrack').style.transform = `translateX(-${currentSlide * 100}%)`;
+      document.querySelectorAll('.slider-dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentSlide);
+      });
+    }
+
+    function moveSlide(dir) {
+      currentSlide = (currentSlide + dir + totalSlides) % totalSlides;
+      updateSlider();
+    }
+
+    function goSlide(i) {
+      currentSlide = i;
+      updateSlider();
+    }
+
+    setInterval(() => moveSlide(1), 5000);
   </script>
 
 </body>

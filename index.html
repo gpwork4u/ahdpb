@@ -265,62 +265,70 @@
 
     /* About */
     #about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       background: var(--light);
-      padding: 5rem 3rem;
       max-width: none;
+      padding: 0;
+      position: relative;
+      overflow: hidden;
     }
 
-    #about > .section-inner {
-      max-width: 1200px;
-      margin: 0 auto;
+    .about-text-side {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 4rem;
     }
 
-    #about h2 {
+    .about-text-side h2 {
       font-size: 2rem;
       margin-bottom: 1rem;
       color: var(--primary);
-      text-align: center;
     }
 
-    #about h2::after {
+    .about-text-side h2::after {
       content: "";
       display: block;
       width: 60px;
       height: 3px;
       background: var(--denim);
-      margin: 0.8rem auto 0;
+      margin: 0.8rem 0 0;
       border-radius: 2px;
     }
 
-    #about .section-desc {
-      text-align: center;
-      max-width: 600px;
-      margin: 0 auto 3rem;
+    .about-text-side .section-desc {
+      margin: 0 0 2rem;
       color: #888;
     }
 
-    .about-content {
-      display: grid;
-      grid-template-columns: 280px 1fr;
-      gap: 2.5rem;
-      align-items: center;
-    }
+    .about-text-side p { margin-bottom: 1rem; color: #555; font-size: 1.1rem; line-height: 1.8; }
 
-    .about-photo {
-      border-radius: 16px;
+    .about-visual {
+      position: relative;
       overflow: hidden;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+      min-height: 500px;
     }
 
-    .about-photo img {
+    .about-visual::before {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 120px;
+      background: linear-gradient(to left, var(--light), transparent);
+      z-index: 2;
+    }
+
+    .about-visual img {
       width: 100%;
-      height: 400px;
+      height: 100%;
       object-fit: cover;
       object-position: center 15%;
       display: block;
+      filter: brightness(0.95) contrast(1.05);
     }
-
-    .about-text p { margin-bottom: 1rem; color: #555; }
 
     /* Contact */
     #contact {
@@ -398,14 +406,16 @@
       .hero-visual::before { display: none; }
       #services, #about, #contact { padding: 4rem 1.5rem; }
       .services-grid { grid-template-columns: 1fr; }
-      .about-photo { display: none; }
-      .about-content { grid-template-columns: 1fr; }
+      #about { grid-template-columns: 1fr; }
+      .about-visual { min-height: 50vh; }
+      .about-visual::before { display: none; }
+      .about-text-side { padding: 3rem 1.5rem; }
     }
 
     @media (min-width: 769px) and (max-width: 1024px) {
       .services-grid { grid-template-columns: 1fr 1fr; }
-      .about-content { grid-template-columns: 1fr 1fr; }
-      .about-photo { display: none; }
+      #about { grid-template-columns: 1fr 1fr; }
+      .about-visual { min-height: 400px; }
     }
   </style>
 </head>
@@ -550,34 +560,30 @@
   </section>
 
   <section id="about">
-    <div class="section-inner">
+    <div class="about-visual">
+      <img src="https://seigura.com/wp-content/uploads/2023/12/MG_3664.jpg" alt="Aoki Hina">
+    </div>
+    <div class="about-text-side">
       <h2>About Us</h2>
       <p class="section-desc">
         <span class="lang-zh">以熱情驅動，用專業實現，讓每一場偶像活動都值得 Priority Boarding。</span>
         <span class="lang-ja">情熱で駆動し、プロフェッショナルで実現する。すべてのアイドルイベントにPriority Boardingを。</span>
         <span class="lang-en">Driven by passion, delivered with professionalism. Every idol event deserves Priority Boarding.</span>
       </p>
-      <div class="about-content">
-        <div class="about-photo">
-          <img src="https://seigura.com/wp-content/uploads/2023/12/MG_3664.jpg" alt="Aoki Hina">
-        </div>
-        <div class="about-text">
-          <div class="lang-zh">
-            <p><strong>Aoki Hina Deserves Priority Boarding（AHDPB）</strong>是一家專注於偶像活動主辦與代理的團隊。</p>
-            <p>我們的目標很簡單——讓青木陽菜來台灣表演的時候，可以坐商務艙。</p>
-            <p>為了實現這個目標，我們全力投入偶像活動的企劃、海外代理與遠征團規劃，以最高規格的服務標準，為偶像文化搭建起跨越國境的橋樑。每一張門票、每一場活動、每一次應援，都是我們離這個夢想更近一步的證明。</p>
-          </div>
-          <div class="lang-ja">
-            <p><strong>Aoki Hina Deserves Priority Boarding（AHDPB）</strong>は、アイドルイベントの主催とエージェント業務に特化したチームです。</p>
-            <p>私たちの目標はシンプルです——青木陽菜が台湾公演に来る時、ビジネスクラスに乗れるようにすること。</p>
-            <p>この目標を実現するため、アイドルイベントの企画、海外エージェント、遠征ツアーの企画に全力を注ぎ、最高水準のサービスでアイドル文化の国境を越える架け橋を築いています。一枚のチケット、一つのイベント、一つの応援が、この夢に近づく証です。</p>
-          </div>
-          <div class="lang-en">
-            <p><strong>Aoki Hina Deserves Priority Boarding (AHDPB)</strong> is a team dedicated to idol event production and agency services.</p>
-            <p>Our goal is simple — to make sure Aoki Hina flies business class when she comes to perform in Taiwan.</p>
-            <p>To achieve this dream, we pour everything into event planning, overseas agency work, and fan tour organization. With the highest standards of service, we build bridges across borders for idol culture. Every ticket sold, every event produced, every cheer echoed brings us one step closer to that dream.</p>
-          </div>
-        </div>
+      <div class="lang-zh">
+        <p><strong>Aoki Hina Deserves Priority Boarding（AHDPB）</strong>是一家專注於偶像活動主辦與代理的團隊。</p>
+        <p>我們的目標很簡單——讓青木陽菜來台灣表演的時候，可以坐商務艙。</p>
+        <p>為了實現這個目標，我們全力投入偶像活動的企劃、海外代理與遠征團規劃，以最高規格的服務標準，為偶像文化搭建起跨越國境的橋樑。每一張門票、每一場活動、每一次應援，都是我們離這個夢想更近一步的證明。</p>
+      </div>
+      <div class="lang-ja">
+        <p><strong>Aoki Hina Deserves Priority Boarding（AHDPB）</strong>は、アイドルイベントの主催とエージェント業務に特化したチームです。</p>
+        <p>私たちの目標はシンプルです——青木陽菜が台湾公演に来る時、ビジネスクラスに乗れるようにすること。</p>
+        <p>この目標を実現するため、アイドルイベントの企画、海外エージェント、遠征ツアーの企画に全力を注ぎ、最高水準のサービスでアイドル文化の国境を越える架け橋を築いています。一枚のチケット、一つのイベント、一つの応援が、この夢に近づく証です。</p>
+      </div>
+      <div class="lang-en">
+        <p><strong>Aoki Hina Deserves Priority Boarding (AHDPB)</strong> is a team dedicated to idol event production and agency services.</p>
+        <p>Our goal is simple — to make sure Aoki Hina flies business class when she comes to perform in Taiwan.</p>
+        <p>To achieve this dream, we pour everything into event planning, overseas agency work, and fan tour organization. With the highest standards of service, we build bridges across borders for idol culture. Every ticket sold, every event produced, every cheer echoed brings us one step closer to that dream.</p>
       </div>
     </div>
   </section>

@@ -7,8 +7,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500;1,600&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+TC:wght@400;500;700&family=Noto+Sans+TC:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@400;500;700&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-tc-web@latest/style.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&family=Liu+Jian+Mao+Cao&family=ZCOOL+XiaoWei&display=swap">
 <style>
   /*=== TWEAKABLE DEFAULTS =========================================*/
   :root {
@@ -23,10 +21,10 @@
     --accent: #E8A76C;
     --accent-ink: #0B1420;
 
-    --font-serif: "Instrument Serif", "Noto Serif TC", "Noto Serif JP", "Songti TC", "Source Han Serif TC", Georgia, serif;
-    --font-italic: "Cormorant Garamond", "Instrument Serif", "Noto Serif TC", Georgia, serif;
-    --font-sans: "Inter Tight", "Smiley Sans Oblique", "PingFang TC", "Noto Sans TC", "Noto Sans JP", "Hiragino Sans", -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-cn: "LXGW WenKai TC", "Noto Serif TC", "PingFang TC", "Songti TC", serif;
+    --font-serif: "Noto Serif TC", "Noto Serif JP", "Songti TC", "Source Han Serif TC", Georgia, serif;
+    --font-italic: "Cormorant Garamond", "Noto Serif TC", Georgia, serif;
+    --font-sans: "Noto Serif TC", "Noto Serif JP", "Songti TC", "Source Han Serif TC", Georgia, serif;
+    --font-cn: "Noto Serif TC", "Songti TC", serif;
     --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
   }
 
@@ -884,35 +882,6 @@
     font-weight: 400;
     letter-spacing: 0.02em;
   }
-  [data-subfont="wenkai"] .hero h1 .small.t-zh { font-family: var(--font-serif); letter-spacing: 0.02em; }
-  [data-subfont="xiaowei"] .hero h1 .small.t-zh { font-family: "ZCOOL XiaoWei", "Noto Serif TC", serif; letter-spacing: 0.06em; font-weight: 400; }
-  [data-subfont="serif"]   .hero h1 .small.t-zh { font-family: "Noto Serif TC", "Songti TC", serif; font-weight: 500; letter-spacing: 0.04em; }
-  [data-subfont="sans"]    .hero h1 .small.t-zh { font-family: "PingFang TC", "Noto Sans TC", sans-serif; font-weight: 400; letter-spacing: 0.02em; }
-
-  .subfont-picker {
-    margin-top: 0.8rem;
-    display: inline-flex;
-    gap: 0.3rem;
-    padding: 3px;
-    background: rgba(244,235,220,0.05);
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-  .subfont-picker button {
-    background: transparent; border: 0; color: var(--ink-mute);
-    padding: 0.35rem 0.7rem;
-    border-radius: 999px;
-    cursor: pointer;
-    transition: all 0.2s;
-    font: inherit;
-  }
-  .subfont-picker button.active { background: var(--accent); color: var(--accent-ink); }
-  .subfont-picker button:not(.active):hover { color: var(--ink); }
-
   .contact-sub {
     margin-top: 1.8rem;
     color: var(--ink-dim);
@@ -1032,73 +1001,6 @@
   .reveal[data-delay="3"] { transition-delay: 0.3s; }
   .reveal[data-delay="4"] { transition-delay: 0.4s; }
 
-  /*=== TWEAKS PANEL ==============================================*/
-  .tweaks-panel {
-    position: fixed;
-    right: 1.2rem;
-    bottom: 1.2rem;
-    z-index: 200;
-    background: rgba(11,20,32,0.92);
-    backdrop-filter: blur(18px);
-    border: 1px solid var(--line-strong);
-    border-radius: 14px;
-    padding: 1rem 1.1rem;
-    width: 260px;
-    font-family: var(--font-mono);
-    box-shadow: 0 20px 60px -20px rgba(0,0,0,0.8);
-    display: none;
-  }
-  .tweaks-panel.on { display: block; }
-  .tweaks-panel h4 {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 0.8rem;
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .tweaks-panel h4 .close {
-    background: transparent; border: 0; color: var(--ink-mute); cursor: pointer;
-  }
-  .tweak-row { margin-bottom: 0.9rem; }
-  .tweak-row:last-child { margin-bottom: 0; }
-  .tweak-row label {
-    display: block;
-    font-size: 0.62rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
-    margin-bottom: 0.4rem;
-  }
-  .swatches { display: flex; gap: 0.4rem; }
-  .swatches button {
-    width: 26px; height: 26px; border-radius: 50%;
-    border: 2px solid transparent;
-    cursor: pointer;
-    transition: transform 0.2s, border-color 0.2s;
-  }
-  .swatches button:hover { transform: scale(1.08); }
-  .swatches button.active { border-color: var(--ink); }
-
-  .tweak-seg {
-    display: flex; gap: 0.2rem;
-    background: rgba(244,235,220,0.05);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: 2px;
-  }
-  .tweak-seg button {
-    flex: 1;
-    background: transparent; border: 0; color: var(--ink-mute);
-    padding: 0.4rem 0.5rem;
-    font-family: inherit; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .tweak-seg button.active { background: var(--accent); color: var(--accent-ink); }
-
   /*=== RESPONSIVE =================================================*/
   @media (max-width: 980px) {
     nav.status { grid-template-columns: 1fr auto; }
@@ -1120,14 +1022,7 @@
   }
 </style>
 </head>
-<body data-i18n="zh" data-subfont="wenkai">
-
-<!-- EDITMODE state (Tweaks on/off persistence) -->
-<script>
-  const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
-    "accent": "amber"
-  }/*EDITMODE-END*/;
-</script>
+<body data-i18n="zh">
 
 <div class="wrap">
 
@@ -1175,13 +1070,6 @@
         <span class="small t-ja">——だからビジネスクラスに乗せたい。</span>
         <span class="small t-en">——so we're getting her into business class.</span>
       </h1>
-      <div class="subfont-picker reveal" data-delay="1" id="subfontPicker" aria-label="字型">
-        <button data-sf="wenkai" class="active">霎鷄文楊</button>
-        <button data-sf="xiaowei">小娚</button>
-        <button data-sf="serif">明體</button>
-        <button data-sf="sans">黑體</button>
-      </div>
-
       <p class="hero-tagline reveal" data-delay="2">
         <span class="t-zh"><strong>AHDPB</strong> 是一間把「追星」當作任務去執行的小團隊。我們把偶像請來台灣，把粉絲帶去日本，處理你最在乎也最懶得處理的所有細節——從公演招致、遠征企劃到花牆與應援物。</span>
         <span class="t-ja"><strong>AHDPB</strong> は「推し活」をミッションとして遂行する小さなチーム。アイドルを台湾に招致し、ファンを日本へ連れて行く。公演招致、遠征企画、フラスタ、応援グッズまで、あなたが本当に気にする細部を引き受けます。</span>
@@ -1484,21 +1372,6 @@
 
 </div><!-- /wrap -->
 
-<!-- TWEAKS PANEL -->
-<div class="tweaks-panel" id="tweaksPanel">
-  <h4>Tweaks <button class="close" id="tweaksClose" aria-label="close">×</button></h4>
-  <div class="tweak-row">
-    <label>Accent</label>
-    <div class="swatches" id="swatches">
-      <button data-accent="amber" style="background:#E8A76C"></button>
-      <button data-accent="sakura" style="background:#F0A3B5"></button>
-      <button data-accent="mint" style="background:#8FD6B5"></button>
-      <button data-accent="sky" style="background:#7DB1E8"></button>
-      <button data-accent="violet" style="background:#B196E8"></button>
-    </div>
-  </div>
-</div>
-
 <script>
 (function(){
   /*=== LANG ===*/
@@ -1549,24 +1422,6 @@
   }
   window.addEventListener('scroll', onScroll, { passive: true });
 
-  /*=== SUBFONT PICKER ===*/
-  document.querySelectorAll('#subfontPicker button').forEach(b => {
-    b.addEventListener('click', () => {
-      document.body.setAttribute('data-subfont', b.dataset.sf);
-      document.querySelectorAll('#subfontPicker button').forEach(x => x.classList.toggle('active', x === b));
-      try { localStorage.setItem('ahdpb:subfont', b.dataset.sf); } catch(e){}
-    });
-  });
-  try {
-    const sf = localStorage.getItem('ahdpb:subfont');
-    if (sf) {
-      document.body.setAttribute('data-subfont', sf);
-      document.querySelectorAll('#subfontPicker button').forEach(x => x.classList.toggle('active', x.dataset.sf === sf));
-    }
-  } catch(e){}
-
-  /*=== SERVICES (slider only) ===*/
-
   /*=== SLIDER ===*/
   let cur = 0;
   const total = 3;
@@ -1580,44 +1435,6 @@
   document.getElementById('nextBtn')?.addEventListener('click', () => { cur = (cur + 1) % total; updateSlider(); });
   document.querySelectorAll('.slider-dot').forEach(d => d.addEventListener('click', () => { cur = +d.dataset.i; updateSlider(); }));
 
-  /*=== ACCENT SWATCHES ===*/
-  const ACCENTS = {
-    amber:  { hex: '#E8A76C', dark: '#0B1420' },
-    sakura: { hex: '#F0A3B5', dark: '#0B1420' },
-    mint:   { hex: '#8FD6B5', dark: '#0B1420' },
-    sky:    { hex: '#7DB1E8', dark: '#0B1420' },
-    violet: { hex: '#B196E8', dark: '#0B1420' },
-  };
-  function setAccent(name){
-    const a = ACCENTS[name] || ACCENTS.amber;
-    document.documentElement.style.setProperty('--accent', a.hex);
-    document.querySelectorAll('#swatches button').forEach(b => b.classList.toggle('active', b.dataset.accent === name));
-    try { localStorage.setItem('ahdpb:accent', name); } catch(e){}
-    window.__currentAccent = name;
-  }
-  document.querySelectorAll('#swatches button').forEach(b => b.addEventListener('click', () => setAccent(b.dataset.accent)));
-  try {
-    const savedA = localStorage.getItem('ahdpb:accent') || TWEAK_DEFAULTS.accent;
-    setAccent(savedA);
-  } catch(e){ setAccent('amber'); }
-
-  /*=== TWEAKS EDIT MODE ===*/
-  const panel = document.getElementById('tweaksPanel');
-  window.addEventListener('message', ev => {
-    const d = ev.data || {};
-    if (d.type === '__activate_edit_mode') panel.classList.add('on');
-    if (d.type === '__deactivate_edit_mode') panel.classList.remove('on');
-  });
-  document.getElementById('tweaksClose')?.addEventListener('click', () => {
-    panel.classList.remove('on');
-    window.parent.postMessage({ type: '__edit_mode_deactivated' }, '*');
-  });
-  // persist changes
-  document.querySelectorAll('#swatches button').forEach(b => b.addEventListener('click', () => {
-    window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { accent: b.dataset.accent } }, '*');
-  }));
-  // announce last
-  window.parent.postMessage({ type: '__edit_mode_available' }, '*');
 })();
 </script>
 

@@ -1,955 +1,1625 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aoki Hina Deserves Priority Boarding</title>
-  <style>
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    :root {
-      --primary: #1e2d42;
-      --accent: #4a7ab5;
-      --accent2: #3b5a8a;
-      --warm: #d4896a;
-      --warm-light: #f0c4b0;
-      --green: #7ba05b;
-      --green-light: #a8c686;
-      --light: #f5f1ed;
-      --denim: #4a6fa5;
-      --denim-dark: #2c4a6e;
-    }
-
-    body {
-      font-family: "Helvetica Neue", Arial, "Noto Sans TC", "Noto Sans JP", sans-serif;
-      color: #333;
-      line-height: 1.6;
-      background: var(--primary);
-      scroll-behavior: smooth;
-    }
-
-    /* Respect reduced motion preference */
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-      body { scroll-behavior: auto; }
-      .reveal { opacity: 1; transform: none; }
-    }
-
-    /* Focus visible for keyboard navigation */
-    :focus-visible {
-      outline: 2px solid var(--warm);
-      outline-offset: 3px;
-      border-radius: 4px;
-    }
-
-    :focus:not(:focus-visible) {
-      outline: none;
-    }
-
-    /* Nav */
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      padding: 1rem 3rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 100;
-      background: rgba(30,45,66,0.9);
-      backdrop-filter: blur(10px);
-      transition: box-shadow 0.3s, padding 0.3s;
-    }
-
-    nav.scrolled {
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-      padding: 0.7rem 3rem;
-    }
-
-    nav .logo {
-      font-weight: 800;
-      font-size: 1.1rem;
-      color: #fff;
-      text-decoration: none;
-    }
-
-    nav .logo span { color: var(--warm); }
-
-    nav .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 1.5rem;
-    }
-
-    nav a {
-      color: rgba(255,255,255,0.85);
-      text-decoration: none;
-      font-size: 0.95rem;
-      transition: color 0.2s;
-    }
-
-    nav a:hover { color: var(--warm-light); }
-
-    .lang-switch {
-      display: flex;
-      gap: 0.25rem;
-    }
-
-    .lang-switch button {
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.15);
-      color: rgba(255,255,255,0.6);
-      padding: 0.3rem 0.6rem;
-      font-size: 0.75rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-      border-radius: 4px;
-    }
-
-    .lang-switch button:hover {
-      background: rgba(255,255,255,0.15);
-      color: #fff;
-    }
-
-    .lang-switch button.active {
-      background: var(--warm);
-      border-color: var(--warm);
-      color: #fff;
-    }
-
-    /* Hero */
-    .hero {
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      background: linear-gradient(135deg, var(--primary) 0%, var(--denim-dark) 50%, #1a3350 100%);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 20% 80%, rgba(123,160,91,0.12) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(74,122,181,0.1) 0%, transparent 50%);
-      pointer-events: none;
-    }
-
-    .hero-text {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 6rem 4rem 4rem;
-      position: relative;
-      z-index: 1;
-      color: #fff;
-    }
-
-    .hero h1 {
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      font-weight: 800;
-      letter-spacing: 0.02em;
-      margin-bottom: 0.8rem;
-      line-height: 1.2;
-    }
-
-    .hero h1 span {
-      color: var(--warm);
-      display: block;
-    }
-
-    .hero .tagline {
-      font-size: clamp(0.95rem, 2vw, 1.25rem);
-      opacity: 0.85;
-      margin-bottom: 2.5rem;
-      line-height: 1.8;
-    }
-
-    .hero .cta {
-      display: inline-block;
-      padding: 0.9rem 2.5rem;
-      background: var(--warm);
-      color: #fff;
-      text-decoration: none;
-      border-radius: 50px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
-      width: fit-content;
-    }
-
-    .hero .cta:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(212,137,106,0.4);
-    }
-
-    .hero-visual {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .hero-visual::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 120px;
-      background: linear-gradient(to right, var(--denim-dark), transparent);
-      z-index: 2;
-    }
-
-    .hero-visual img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 20%;
-      filter: brightness(0.95) contrast(1.05);
-    }
-
-    /* Services */
-    #services {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      background: linear-gradient(180deg, #1a3350 0%, var(--primary) 100%);
-      max-width: none;
-      padding: 0;
-      overflow: hidden;
-    }
-
-    .services-text-side {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 3rem 4rem;
-    }
-
-    .services-text-side h2 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: #fff;
-    }
-
-    .services-text-side h2::after {
-      content: "";
-      display: block;
-      width: 60px;
-      height: 3px;
-      background: var(--warm);
-      margin: 0.8rem 0 0;
-      border-radius: 2px;
-    }
-
-    .services-visual {
-      position: relative;
-      overflow: hidden;
-      max-height: 1200px;
-    }
-
-    .services-visual::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 120px;
-      background: linear-gradient(to right, var(--primary), transparent);
-      z-index: 2;
-    }
-
-    .services-visual img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 20%;
-      filter: brightness(0.9) contrast(1.05);
-    }
-
-    .slider {
-      position: relative;
-      overflow: hidden;
-      border-radius: 16px;
-    }
-
-    .slider-track {
-      display: flex;
-      transition: transform 0.5s ease;
-    }
-
-    .slide {
-      min-width: 100%;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 16px;
-      padding: 3rem 4rem;
-      backdrop-filter: blur(4px);
-      text-align: center;
-    }
-
-    .slide .icon {
-      margin-bottom: 1.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .slide .icon svg {
-      width: 48px;
-      height: 48px;
-      stroke: var(--warm-light);
-      stroke-width: 1.5;
-      fill: none;
-    }
-
-    .slide h3 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      color: var(--warm-light);
-    }
-
-    .slide p {
-      color: rgba(255,255,255,0.65);
-      font-size: 1.05rem;
-      line-height: 1.8;
-      max-width: 500px;
-      margin: 0 auto;
-    }
-
-    .slider-controls {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-
-    .slider-btn {
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.2);
-      color: #fff;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      font-size: 1.2rem;
-      cursor: pointer;
-      transition: all 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .slider-btn:hover {
-      background: var(--warm);
-      border-color: var(--warm);
-    }
-
-    .slider-dots {
-      display: flex;
-      gap: 0.75rem;
-    }
-
-    .slider-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.2);
-      border: none;
-      cursor: pointer;
-      transition: all 0.2s;
-      padding: 0;
-      position: relative;
-    }
-
-    /* Expand touch target to 44px while keeping visual size */
-    .slider-dot::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 44px;
-      height: 44px;
-    }
-
-    .slider-dot.active {
-      background: var(--warm);
-      transform: scale(1.3);
-    }
-
-    /* About */
-    #about {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: auto;
-      background: var(--light);
-      max-width: none;
-      padding: 0;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .about-text-side {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 3rem 4rem;
-    }
-
-    .about-text-side h2 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: var(--primary);
-    }
-
-    .about-text-side h2::after {
-      content: "";
-      display: block;
-      width: 60px;
-      height: 3px;
-      background: var(--denim);
-      margin: 0.8rem 0 0;
-      border-radius: 2px;
-    }
-
-    .about-text-side .section-desc {
-      margin: 0 0 2rem;
-      color: #888;
-    }
-
-    .about-text-side p { margin-bottom: 1rem; color: #555; font-size: 1.1rem; line-height: 1.8; }
-
-    .about-visual {
-      position: relative;
-      overflow: hidden;
-      max-height: 1280px;
-    }
-
-    .about-visual::before {
-      content: "";
-      position: absolute;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      width: 120px;
-      background: linear-gradient(to left, var(--light), transparent);
-      z-index: 2;
-    }
-
-    .about-visual img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 10%;
-      display: block;
-      filter: brightness(0.95) contrast(1.05);
-    }
-
-    /* Contact */
-    #contact {
-      background: var(--primary);
-      padding: 5rem 3rem;
-      max-width: none;
-    }
-
-    #contact > .section-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    #contact h2 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: #fff;
-      text-align: center;
-    }
-
-    #contact h2::after {
-      content: "";
-      display: block;
-      width: 60px;
-      height: 3px;
-      background: var(--warm);
-      margin: 0.8rem auto 0;
-      border-radius: 2px;
-    }
-
-    #contact .section-desc {
-      text-align: center;
-      max-width: 600px;
-      margin: 0 auto 3rem;
-      color: rgba(255,255,255,0.6);
-    }
-
-    .contact-cards {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
-
-    .contact-card {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 12px;
-      padding: 2rem 2.5rem;
-      text-align: center;
-      min-width: 220px;
-      transition: transform 0.2s, border-color 0.2s;
-    }
-
-    .contact-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(255,255,255,0.25);
-    }
-
-    .contact-card .contact-icon {
-      margin-bottom: 0.8rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .contact-card .contact-icon svg {
-      width: 32px;
-      height: 32px;
-      stroke: var(--warm);
-      stroke-width: 1.5;
-      fill: none;
-    }
-
-    .contact-card h4 {
-      color: rgba(255,255,255,0.9);
-      margin-bottom: 0.5rem;
-      font-size: 1rem;
-    }
-
-    .contact-card p {
-      color: rgba(255,255,255,0.6);
-      font-size: 0.95rem;
-    }
-
-    .contact-card a {
-      color: var(--warm-light);
-      text-decoration: none;
-      font-weight: 600;
-      transition: color 0.2s;
-    }
-
-    .contact-card a:hover {
-      color: var(--warm);
-    }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 2.5rem 3rem;
-      background: #141f2e;
-      color: rgba(255,255,255,0.35);
-      font-size: 0.85rem;
-    }
-
-    footer .footer-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    footer .footer-nav {
-      display: flex;
-      gap: 2rem;
-      margin-bottom: 0.5rem;
-    }
-
-    footer .footer-nav a {
-      color: rgba(255,255,255,0.5);
-      text-decoration: none;
-      font-size: 0.85rem;
-      transition: color 0.2s;
-    }
-
-    footer .footer-nav a:hover {
-      color: var(--warm-light);
-    }
-
-    /* i18n */
-    [data-i18n] .lang-zh,
-    [data-i18n] .lang-ja,
-    [data-i18n] .lang-en { display: none; }
-    [data-i18n="zh"] .lang-zh { display: block; }
-    [data-i18n="ja"] .lang-ja { display: block; }
-    [data-i18n="en"] .lang-en { display: block; }
-    span.lang-zh, span.lang-ja, span.lang-en { display: none !important; }
-    [data-i18n="zh"] span.lang-zh { display: inline !important; }
-    [data-i18n="ja"] span.lang-ja { display: inline !important; }
-    [data-i18n="en"] span.lang-en { display: inline !important; }
-
-    /* Scroll reveal */
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      nav { padding: 1rem 1.5rem; }
-      nav.scrolled { padding: 0.7rem 1.5rem; }
-      nav ul { display: none; }
-      .hero { grid-template-columns: 1fr; }
-      .hero-text { padding: 7rem 2rem 3rem; text-align: center; align-items: center; }
-      .hero-visual { height: 50vh; }
-      .hero-visual::before { display: none; }
-      #contact { padding: 4rem 1.5rem; }
-      #services { grid-template-columns: 1fr; }
-      .services-visual { height: 50vh; }
-      .services-visual::before { display: none; }
-      .services-text-side { padding: 3rem 1.5rem; }
-      .slide { padding: 2rem 1.5rem; }
-      #about { grid-template-columns: 1fr; }
-      .about-visual { min-height: 50vh; }
-      .about-visual::before { display: none; }
-      .about-text-side { padding: 3rem 1.5rem; }
-      .contact-cards { flex-direction: column; align-items: center; }
-      footer .footer-nav { gap: 1.2rem; }
-    }
-
-    @media (min-width: 769px) and (max-width: 1024px) {
-      #about { grid-template-columns: 1fr 1fr; }
-      .about-visual { min-height: 400px; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AHDPB — Aoki Hina Deserves Priority Boarding</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500;1,600&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+TC:wght@400;500;700&family=Noto+Sans+TC:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@400;500;700&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-tc-web@latest/style.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zhi+Mang+Xing&family=Liu+Jian+Mao+Cao&family=ZCOOL+XiaoWei&display=swap">
+<style>
+  /*=== TWEAKABLE DEFAULTS =========================================*/
+  :root {
+    --bg: #0B1420;
+    --bg-2: #131F30;
+    --bg-3: #1B2A40;
+    --ink: #F4EBDC;
+    --ink-dim: rgba(244,235,220,0.62);
+    --ink-mute: rgba(244,235,220,0.38);
+    --line: rgba(244,235,220,0.12);
+    --line-strong: rgba(244,235,220,0.24);
+    --accent: #E8A76C;
+    --accent-ink: #0B1420;
+
+    --font-serif: "Instrument Serif", "Noto Serif TC", "Noto Serif JP", "Songti TC", "Source Han Serif TC", Georgia, serif;
+    --font-italic: "Cormorant Garamond", "Instrument Serif", "Noto Serif TC", Georgia, serif;
+    --font-sans: "Inter Tight", "Smiley Sans Oblique", "PingFang TC", "Noto Sans TC", "Noto Sans JP", "Hiragino Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-cn: "LXGW WenKai TC", "Noto Serif TC", "PingFang TC", "Songti TC", serif;
+    --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    font-feature-settings: "ss01", "cv11";
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; }
+
+  ::selection { background: var(--accent); color: var(--accent-ink); }
+
+  /* ambient background grain + hair-line grid */
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 80px 80px;
+    opacity: 0.35;
+    mask-image: radial-gradient(ellipse at 50% 30%, black 0%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse at 50% 30%, black 0%, transparent 80%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  body::after {
+    content: "";
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.06 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: overlay;
+  }
+
+  .wrap { position: relative; z-index: 2; }
+
+  /*=== NAV / STATUS BAR ===========================================*/
+  nav.status {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 0.9rem 2rem;
+    background: rgba(11,20,32,0.72);
+    backdrop-filter: blur(18px) saturate(1.2);
+    -webkit-backdrop-filter: blur(18px) saturate(1.2);
+    border-bottom: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .brand {
+    display: flex; align-items: baseline; gap: 0.6rem;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .brand .mark {
+    display: inline-block;
+    width: 10px; height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+    margin-right: 0.4rem;
+    box-shadow: 0 0 0 0 var(--accent);
+    animation: pulse 2.4s ease-out infinite;
+    transform: translateY(1px);
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(232,167,108,0.55); }
+    80%,100% { box-shadow: 0 0 0 10px rgba(232,167,108,0); }
+  }
+  .brand .sub { color: var(--ink-mute); font-weight: 400; }
+
+  .nav-center {
+    display: flex;
+    justify-content: flex-end;
+    gap: 2.2rem;
+    color: var(--ink-dim);
+    margin-left: auto;
+  }
+  .nav-center a {
+    position: relative;
+    transition: color 0.2s;
+  }
+  .nav-center a:hover { color: var(--ink); }
+  .nav-center a::before {
+    content: "→ ";
+    color: var(--accent);
+    opacity: 0;
+    margin-right: 0.1rem;
+    transition: opacity 0.2s, margin 0.2s;
+  }
+  .nav-center a:hover::before { opacity: 1; margin-right: 0.3rem; }
+
+  .nav-right { display: flex; align-items: center; gap: 1rem; }
+
+  .lang-switch {
+    display: flex;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    overflow: hidden;
+    padding: 2px;
+    background: rgba(244,235,220,0.04);
+  }
+  .lang-switch button {
+    background: transparent;
+    border: 0;
+    color: var(--ink-mute);
+    padding: 0.35rem 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    border-radius: 999px;
+    transition: all 0.25s;
+  }
+  .lang-switch button:hover { color: var(--ink); }
+  .lang-switch button.active {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+
+  /*=== HERO =======================================================*/
+  .hero {
+    min-height: 100vh;
+    padding: 8rem 2rem 4rem;
+    display: grid;
+    grid-template-columns: minmax(0,1.15fr) minmax(0,0.85fr);
+    gap: 3rem;
+    align-items: stretch;
+    position: relative;
+    isolation: isolate;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+  }
+  .hero-bg::before {
+    content: "";
+    position: absolute;
+    right: -20%;
+    top: -20%;
+    width: 85%;
+    height: 140%;
+    background: radial-gradient(closest-side, rgba(var(--accent-rgb, 230, 180, 92), 0.08), transparent 70%);
+    filter: blur(30px);
+  }
+  .hero-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, transparent 0%, transparent 60%, rgba(11,20,32,0.5) 100%);
+  }
+
+  .hero-meta {
+    position: absolute;
+    top: 6rem;
+    left: 2rem;
+    right: 2rem;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-mute);
+  }
+  .hero-meta .dot { color: var(--accent); }
+
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 1rem;
+    border-left: 1px solid var(--line);
+    position: relative;
+  }
+  .hero-text::before {
+    content: "";
+    position: absolute;
+    left: -4px; top: 2rem;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.4rem;
+    display: flex; align-items: center; gap: 0.7rem;
+  }
+  .eyebrow .line-deco {
+    flex: 0 0 40px;
+    height: 1px; background: var(--accent);
+    opacity: 0.6;
+  }
+
+  .hero h1 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(3rem, 7.5vw, 7rem);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .hero h1 em {
+    font-family: var(--font-italic);
+    font-style: italic;
+    font-weight: 500;
+    color: var(--accent);
+    display: block;
+    letter-spacing: 0;
+  }
+  .hero h1 .small {
+    font-size: 0.48em;
+    letter-spacing: 0;
+    margin-top: 0.25em;
+    color: var(--ink-dim);
+    font-style: normal;
+  }
+  [data-i18n="zh"] .hero h1 .small.t-zh,
+  [data-i18n="ja"] .hero h1 .small.t-ja,
+  [data-i18n="en"] .hero h1 .small.t-en { display: block; }
+
+  .hero-tagline {
+    margin-top: 2rem;
+    max-width: 46ch;
+    font-size: 1.05rem;
+    color: var(--ink-dim);
+    line-height: 1.65;
+  }
+  .hero-tagline strong { color: var(--ink); font-weight: 500; }
+
+  .hero-actions {
+    margin-top: 2.4rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.8rem;
+    background: var(--accent);
+    color: var(--accent-ink);
+    padding: 0.95rem 1.5rem 0.95rem 1.8rem;
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition: transform 0.25s, box-shadow 0.25s;
+    border: 0;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 40px -10px rgba(232,167,108,0.6);
+  }
+  .btn-primary .arrow {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--accent-ink);
+    color: var(--accent);
+    display: grid; place-items: center;
+    font-size: 0.9rem;
+    transition: transform 0.25s;
+  }
+  .btn-primary:hover .arrow { transform: rotate(-45deg); }
+
+  .btn-ghost {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    padding: 0.4rem 0;
+    border-bottom: 1px solid var(--line-strong);
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .btn-ghost:hover { color: var(--accent); border-color: var(--accent); }
+
+  /* BOARDING PASS CARD */
+  .pass {
+    position: relative;
+    align-self: center;
+    background: linear-gradient(180deg, var(--bg-2), var(--bg-3));
+    border: 1px solid var(--line-strong);
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow:
+      0 30px 80px -30px rgba(0,0,0,0.6),
+      inset 0 1px 0 rgba(244,235,220,0.05);
+    transform: rotate(2.5deg);
+    transition: transform 0.6s cubic-bezier(.2,.8,.2,1);
+  }
+  .pass:hover { transform: rotate(0deg) scale(1.02); }
+
+  .pass-head {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    padding: 1.2rem 1.6rem;
+    border-bottom: 1px dashed var(--line-strong);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+  .pass-head .class {
+    background: var(--accent);
+    color: var(--accent-ink);
+    padding: 0.25rem 0.7rem;
+    border-radius: 4px;
+    font-weight: 700;
+  }
+
+  .pass-body {
+    padding: 1.6rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .port {
+    display: flex;
+    flex-direction: column;
+  }
+  .port.right { align-items: flex-end; text-align: right; }
+
+  .port .code {
+    font-family: var(--font-serif);
+    font-size: 3.4rem;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .port .city {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    margin-top: 0.3rem;
+  }
+
+  .plane-path {
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent);
+    font-size: 1.1rem;
+    position: relative;
+  }
+  .plane-path::before, .plane-path::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: repeating-linear-gradient(to right, var(--line-strong) 0 4px, transparent 4px 8px);
+    min-width: 18px;
+  }
+  .plane-path .icon {
+    padding: 0 0.5rem;
+    font-family: var(--font-mono);
+  }
+
+  .pass-details {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem 0.8rem;
+    padding: 1.2rem 1.6rem 1.4rem;
+    border-top: 1px dashed var(--line-strong);
+  }
+  .pass-details .cell {
+    display: flex; flex-direction: column;
+  }
+  .pass-details .k {
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+  .pass-details .v {
+    font-family: var(--font-mono);
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-top: 0.2rem;
+  }
+
+  .pass-foot {
+    border-top: 1px dashed var(--line-strong);
+    padding: 1rem 1.6rem;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(244,235,220,0.02);
+  }
+  .barcode {
+    display: flex; gap: 2px; height: 34px;
+  }
+  .barcode span {
+    display: block;
+    background: var(--ink);
+    border-radius: 1px;
+    opacity: 0.88;
+  }
+
+  .pass-passenger {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    text-align: right;
+  }
+  .pass-passenger strong { color: var(--ink); display: block; font-size: 0.9rem; margin-top: 0.2rem; }
+
+  /* perforation notches */
+  .pass::before, .pass::after {
+    content: "";
+    position: absolute;
+    left: -11px;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: #0f1a28;
+    border: 1px solid var(--line-strong);
+  }
+  .pass::before { top: calc(50% - 48px); }
+  .pass::after  { top: calc(50% + 12px); left: auto; right: -11px; }
+
+  /*=== SECTION FRAME ==============================================*/
+  section {
+    position: relative;
+    padding: 8rem 2rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .section-head {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2.5rem;
+    align-items: end;
+    margin-bottom: 4rem;
+  }
+  .section-num {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding-bottom: 0.2rem;
+    border-bottom: 1px solid var(--accent);
+    align-self: end;
+  }
+  .section-head h2 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(2.2rem, 5vw, 4.2rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .section-head h2 em {
+    font-family: var(--font-italic);
+    font-style: italic;
+    font-weight: 500;
+    color: var(--accent);
+  }
+
+  /*=== ABOUT ======================================================*/
+  #about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+    padding: 8rem 2rem;
+  }
+  .about-side {
+    position: sticky;
+    top: 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  .about-visual {
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    aspect-ratio: 4 / 5;
+    background: var(--bg-2);
+  }
+  .about-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 15%;
+    filter: grayscale(0.15) brightness(0.92) contrast(1.05);
+    display: block;
+  }
+  .about-visual .stamp {
+    position: absolute;
+    left: 1rem; bottom: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    padding: 0.45rem 0.7rem;
+    background: rgba(11,20,32,0.72);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--line-strong);
+    border-radius: 6px;
+  }
+  .about-visual .stamp b { color: var(--accent); }
+  @media (max-width: 980px) {
+    .about-side { position: static; }
+    .about-visual { aspect-ratio: 4/3; }
+  }
+  .about-copy p {
+    font-size: 1.08rem;
+    color: var(--ink-dim);
+    margin-bottom: 1.2rem;
+    line-height: 1.75;
+  }
+  .about-copy .lead {
+    font-family: var(--font-serif);
+    font-size: 1.9rem;
+    line-height: 1.3;
+    color: var(--ink);
+    margin-bottom: 2rem;
+  }
+  .about-copy .lead em { font-family: var(--font-italic); color: var(--accent); font-style: italic; font-weight: 500; }
+
+  .manifest {
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+    background: linear-gradient(180deg, rgba(244,235,220,0.03), transparent);
+  }
+  .manifest-head {
+    padding: 1rem 1.4rem;
+    border-bottom: 1px solid var(--line);
+    display: flex; justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    background: rgba(244,235,220,0.03);
+  }
+  .manifest-head .live { color: var(--accent); display: flex; align-items: center; gap: 0.4rem; }
+  .manifest-head .live::before {
+    content: ""; width: 6px; height: 6px; background: var(--accent); border-radius: 50%;
+    animation: pulse 2s ease-out infinite;
+  }
+  .manifest-rows > div {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 1.2rem;
+    padding: 1rem 1.4rem;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    align-items: center;
+  }
+  .manifest-rows > div:last-child { border-bottom: 0; }
+  .manifest-rows .k {
+    color: var(--ink-mute);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    min-width: 80px;
+  }
+  .manifest-rows .v { color: var(--ink); }
+  .manifest-rows .badge {
+    color: var(--accent);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 1px solid var(--accent);
+    padding: 0.18rem 0.5rem;
+    border-radius: 999px;
+  }
+
+  /*=== SERVICES ===================================================*/
+  #services {
+    position: relative;
+  }
+
+  .layout-toggle {
+    display: flex;
+    gap: 0.3rem;
+    padding: 0.25rem;
+    background: rgba(244,235,220,0.04);
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 1rem;
+  }
+  .layout-toggle button {
+    background: transparent; border: 0; color: var(--ink-mute);
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    transition: all 0.25s;
+    font-family: inherit; font-size: inherit; letter-spacing: inherit; text-transform: inherit;
+  }
+  .layout-toggle button.active {
+    background: var(--accent); color: var(--accent-ink);
+  }
+  .layout-toggle button:not(.active):hover { color: var(--ink); }
+
+  /* GRID layout (default, "ZONES") */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.4rem;
+  }
+  .zone {
+    position: relative;
+    padding: 2rem;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: linear-gradient(180deg, rgba(244,235,220,0.03), transparent);
+    overflow: hidden;
+    min-height: 420px;
+    display: flex; flex-direction: column;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .zone:hover { border-color: var(--accent); transform: translateY(-4px); }
+  .zone::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 100% 0%, rgba(232,167,108,0.15), transparent 50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+  .zone:hover::after { opacity: 1; }
+
+  .zone-head {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 1.2rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+  .zone-head .zone-num {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .zone-visual {
+    height: 120px;
+    margin: 0 -2rem 1.6rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .zone-visual svg { width: 100%; height: 100%; display: block; }
+
+  .zone h3 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 1.85rem;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.8rem;
+    color: var(--ink);
+  }
+  .zone h3 em { font-family: var(--font-italic); color: var(--accent); font-style: italic; font-weight: 500; }
+
+  .zone p {
+    color: var(--ink-dim);
+    font-size: 0.96rem;
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  .zone-foot {
+    margin-top: 1.4rem;
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--line);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+  .zone-foot .gate { color: var(--ink); }
+
+  /* SLIDER layout */
+  .services-slider { position: relative; }
+
+  .slider-viewport {
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+  }
+  .slider-track {
+    display: flex;
+    transition: transform 0.6s cubic-bezier(.2,.8,.2,1);
+  }
+  .slider-slide {
+    min-width: 100%;
+    padding: 4rem 5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    min-height: 460px;
+  }
+  .slider-slide .zone-visual {
+    height: 100%;
+    min-height: 340px;
+    margin: 0;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+  }
+  .slider-slide h3 { font-size: 2.8rem; margin-bottom: 1.2rem; }
+  .slider-slide p { font-size: 1.08rem; max-width: 42ch; }
+
+  .slider-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 1.4rem;
+  }
+  .slider-dots { display: flex; gap: 0.5rem; }
+  .slider-dot {
+    width: 28px; height: 4px;
+    background: var(--line-strong);
+    border: 0; cursor: pointer;
+    border-radius: 2px;
+    transition: background 0.3s;
+  }
+  .slider-dot.active { background: var(--accent); }
+  .slider-btn {
+    background: transparent;
+    border: 1px solid var(--line-strong);
+    color: var(--ink);
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    transition: all 0.2s;
+    font-family: var(--font-mono);
+  }
+  .slider-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .slider-btns { display: flex; gap: 0.6rem; }
+
+  /* LIST layout */
+  .services-list {
+    flex-direction: column;
+    border-top: 1px solid var(--line);
+  }
+  .list-row {
+    display: grid;
+    grid-template-columns: 64px 96px 1fr 1fr 140px;
+    gap: 1.6rem;
+    padding: 1.4rem 1rem;
+    border-bottom: 1px solid var(--line);
+    align-items: center;
+    transition: background 0.25s, padding 0.25s;
+    cursor: default;
+  }
+  .list-row .thumb {
+    width: 96px; height: 72px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--line-strong);
+    background: var(--bg-2);
+  }
+  .list-row .thumb img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+    filter: grayscale(0.1) brightness(0.9) contrast(1.05);
+    transition: filter 0.3s, transform 0.4s;
+  }
+  .list-row:hover .thumb img { filter: none; transform: scale(1.06); }
+  .list-row:hover {
+    background: rgba(232,167,108,0.04);
+    padding-left: 2rem;
+  }
+  .list-row .num {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+  }
+  .list-row h3 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 2rem;
+    line-height: 1.1;
+  }
+  .list-row h3 em { font-family: var(--font-italic); color: var(--accent); font-style: italic; font-weight: 500; }
+  .list-row p { color: var(--ink-dim); font-size: 0.96rem; max-width: 48ch; }
+  .list-row .gate-tag {
+    justify-self: end;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    text-align: right;
+  }
+  .list-row .gate-tag strong { display: block; color: var(--ink); font-size: 0.95rem; margin-top: 0.2rem; }
+
+  /*=== CONTACT ====================================================*/
+  #contact {
+    padding-bottom: 4rem;
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .contact-headline {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(2.4rem, 5vw, 4.5rem);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+  }
+  .contact-headline em { font-family: var(--font-italic); color: var(--accent); font-style: italic; font-weight: 500; display: block; }
+
+  /* Hero subtitle — match About section heading */
+  [data-i18n="zh"] .hero h1 .small {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+  [data-subfont="wenkai"] .hero h1 .small.t-zh { font-family: var(--font-serif); letter-spacing: 0.02em; }
+  [data-subfont="xiaowei"] .hero h1 .small.t-zh { font-family: "ZCOOL XiaoWei", "Noto Serif TC", serif; letter-spacing: 0.06em; font-weight: 400; }
+  [data-subfont="serif"]   .hero h1 .small.t-zh { font-family: "Noto Serif TC", "Songti TC", serif; font-weight: 500; letter-spacing: 0.04em; }
+  [data-subfont="sans"]    .hero h1 .small.t-zh { font-family: "PingFang TC", "Noto Sans TC", sans-serif; font-weight: 400; letter-spacing: 0.02em; }
+
+  .subfont-picker {
+    margin-top: 0.8rem;
+    display: inline-flex;
+    gap: 0.3rem;
+    padding: 3px;
+    background: rgba(244,235,220,0.05);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .subfont-picker button {
+    background: transparent; border: 0; color: var(--ink-mute);
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font: inherit;
+  }
+  .subfont-picker button.active { background: var(--accent); color: var(--accent-ink); }
+  .subfont-picker button:not(.active):hover { color: var(--ink); }
+
+  .contact-sub {
+    margin-top: 1.8rem;
+    color: var(--ink-dim);
+    font-size: 1.05rem;
+    max-width: 42ch;
+    line-height: 1.65;
+  }
+
+  .gate-card {
+    border: 1px solid var(--line-strong);
+    border-radius: 16px;
+    overflow: hidden;
+    background: linear-gradient(180deg, rgba(244,235,220,0.03), transparent);
+  }
+  .gate-card-head {
+    padding: 1.2rem 1.6rem;
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+  .gate-card-head .status-ok {
+    color: var(--accent);
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .gate-card-head .status-ok::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 2s ease-out infinite; }
+
+  .gate-card-body {
+    padding: 2rem 1.6rem;
+    text-align: center;
+  }
+  .gate-card-body .label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 0.8rem;
+  }
+  .gate-card-body a {
+    font-family: var(--font-serif);
+    font-size: 2.1rem;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    border-bottom: 1px solid var(--line-strong);
+    padding-bottom: 0.2rem;
+    transition: color 0.2s, border-color 0.2s;
+    word-break: break-all;
+  }
+  .gate-card-body a:hover { color: var(--accent); border-color: var(--accent); }
+
+  .gate-card-foot {
+    padding: 1.2rem 1.6rem;
+    border-top: 1px dashed var(--line);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--ink-dim);
+  }
+  .gate-card-foot .k { color: var(--ink-mute); font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; }
+  .gate-card-foot .v { margin-top: 0.2rem; color: var(--ink); }
+
+  /*=== FOOTER =====================================================*/
+  footer {
+    padding: 3rem 2rem 2rem;
+    border-top: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    color: var(--ink-mute);
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  footer .right { text-align: right; }
+  footer .disclaim {
+    grid-column: 1 / -1;
+    padding-top: 1.5rem;
+    margin-top: 1rem;
+    border-top: 1px solid var(--line);
+    max-width: 860px;
+    color: var(--ink-mute);
+    letter-spacing: 0.04em;
+    text-transform: none;
+    line-height: 1.6;
+    font-size: 0.7rem;
+  }
+  footer .disclaim a { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+
+  /*=== I18N =======================================================*/
+  [lang-group] { display: none; }
+  [data-i18n="zh"] [lang-group="zh"] { display: revert; }
+  [data-i18n="ja"] [lang-group="ja"] { display: revert; }
+  [data-i18n="en"] [lang-group="en"] { display: revert; }
+
+  /* in-line spans */
+  .t-zh, .t-ja, .t-en { display: none; }
+  [data-i18n="zh"] .t-zh,
+  [data-i18n="ja"] .t-ja,
+  [data-i18n="en"] .t-en { display: inline; }
+
+  /*=== SCROLL REVEAL ==============================================*/
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s cubic-bezier(.2,.8,.2,1), transform 0.8s cubic-bezier(.2,.8,.2,1);
+  }
+  .reveal.in { opacity: 1; transform: none; }
+  .reveal[data-delay="1"] { transition-delay: 0.1s; }
+  .reveal[data-delay="2"] { transition-delay: 0.2s; }
+  .reveal[data-delay="3"] { transition-delay: 0.3s; }
+  .reveal[data-delay="4"] { transition-delay: 0.4s; }
+
+  /*=== TWEAKS PANEL ==============================================*/
+  .tweaks-panel {
+    position: fixed;
+    right: 1.2rem;
+    bottom: 1.2rem;
+    z-index: 200;
+    background: rgba(11,20,32,0.92);
+    backdrop-filter: blur(18px);
+    border: 1px solid var(--line-strong);
+    border-radius: 14px;
+    padding: 1rem 1.1rem;
+    width: 260px;
+    font-family: var(--font-mono);
+    box-shadow: 0 20px 60px -20px rgba(0,0,0,0.8);
+    display: none;
+  }
+  .tweaks-panel.on { display: block; }
+  .tweaks-panel h4 {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .tweaks-panel h4 .close {
+    background: transparent; border: 0; color: var(--ink-mute); cursor: pointer;
+  }
+  .tweak-row { margin-bottom: 0.9rem; }
+  .tweak-row:last-child { margin-bottom: 0; }
+  .tweak-row label {
+    display: block;
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 0.4rem;
+  }
+  .swatches { display: flex; gap: 0.4rem; }
+  .swatches button {
+    width: 26px; height: 26px; border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .swatches button:hover { transform: scale(1.08); }
+  .swatches button.active { border-color: var(--ink); }
+
+  .tweak-seg {
+    display: flex; gap: 0.2rem;
+    background: rgba(244,235,220,0.05);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 2px;
+  }
+  .tweak-seg button {
+    flex: 1;
+    background: transparent; border: 0; color: var(--ink-mute);
+    padding: 0.4rem 0.5rem;
+    font-family: inherit; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .tweak-seg button.active { background: var(--accent); color: var(--accent-ink); }
+
+  /*=== RESPONSIVE =================================================*/
+  @media (max-width: 980px) {
+    nav.status { grid-template-columns: 1fr auto; }
+    .nav-center { display: none; }
+    .hero { grid-template-columns: 1fr; padding-top: 7rem; gap: 2rem; }
+    .hero-meta { position: static; margin-bottom: 1rem; }
+    .pass { transform: none; max-width: 480px; }
+    #about { grid-template-columns: 1fr; gap: 2.5rem; }
+    .manifest { position: static; }
+    .services-grid { grid-template-columns: 1fr; }
+    .slider-slide { grid-template-columns: 1fr; padding: 2rem; }
+    .list-row { grid-template-columns: 1fr; gap: 0.6rem; padding: 1.4rem 1rem; }
+    .list-row .gate-tag { justify-self: start; text-align: left; }
+    .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .section-head { grid-template-columns: 1fr; gap: 0.8rem; }
+    section { padding: 5rem 1.2rem; }
+    footer { grid-template-columns: 1fr; }
+    footer .right { text-align: left; }
+  }
+</style>
 </head>
-<body data-i18n="zh">
+<body data-i18n="zh" data-subfont="wenkai">
 
-  <nav>
-    <a href="#" class="logo">AHDPB<span>.</span></a>
+<!-- EDITMODE state (Tweaks on/off persistence) -->
+<script>
+  const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+    "accent": "amber"
+  }/*EDITMODE-END*/;
+</script>
+
+<div class="wrap">
+
+  <!-- NAV / STATUS BAR -->
+  <nav class="status">
+    <a href="#top" class="brand">
+      <span class="mark"></span>
+      AHDPB
+      <span class="sub">/ Flt.2026</span>
+    </a>
+    <div class="nav-center">
+      <a href="#about"><span class="t-zh">關於</span><span class="t-ja">about</span><span class="t-en">about</span></a>
+      <a href="#services"><span class="t-zh">服務</span><span class="t-ja">service</span><span class="t-en">service</span></a>
+      <a href="#contact"><span class="t-zh">聯絡</span><span class="t-ja">contact</span><span class="t-en">contact</span></a>
+    </div>
     <div class="nav-right">
-      <ul>
-        <li><a href="#about">
-          <span class="lang-zh">關於我們</span>
-          <span class="lang-ja">私たちについて</span>
-          <span class="lang-en">About</span>
-        </a></li>
-        <li><a href="#services">
-          <span class="lang-zh">服務項目</span>
-          <span class="lang-ja">サービス</span>
-          <span class="lang-en">Services</span>
-        </a></li>
-        <li><a href="#contact">
-          <span class="lang-zh">聯絡</span>
-          <span class="lang-ja">お問い合わせ</span>
-          <span class="lang-en">Contact</span>
-        </a></li>
-      </ul>
-      <div class="lang-switch">
-        <button class="active" onclick="switchLang('zh')">中文</button>
-        <button onclick="switchLang('ja')">日本語</button>
-        <button onclick="switchLang('en')">EN</button>
+      <div class="lang-switch" role="tablist">
+        <button class="active" data-lang="zh">繁</button>
+        <button data-lang="ja">日本語</button>
+        <button data-lang="en">EN</button>
       </div>
     </div>
   </nav>
 
-  <section class="hero">
+  <!-- HERO -->
+  <section class="hero" id="top" data-screen-label="01 Hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-meta">
+      <span>AHDPB · FLIGHT OPS · SINCE 2026</span>
+      <span><span class="dot">●</span> LIVE · TAIPEI → TOKYO · ON TIME</span>
+    </div>
+
     <div class="hero-text">
-      <h1>Aoki Hina Deserves<span>Priority Boarding</span></h1>
-      <p class="tagline">
-        <span class="lang-zh">偶像活動主辦 ・ 海外代理 ・ 粉絲體驗策劃</span>
-        <span class="lang-ja">アイドルイベント主催 ・ 海外エージェント ・ ファン体験プロデュース</span>
-        <span class="lang-en">Idol Event Production ・ Overseas Agency ・ Fan Experience Planning</span>
-      </p>
-      <a href="#contact" class="cta">
-        <span class="lang-zh">聯絡我們</span>
-        <span class="lang-ja">お問い合わせ</span>
-        <span class="lang-en">Contact Us</span>
-      </a>
-    </div>
-    <div class="hero-visual">
-      <img src="https://seigura.com/wp-content/uploads/2023/12/MG_3514.jpg" alt="Aoki Hina">
-    </div>
-  </section>
+      <div class="eyebrow reveal">
+        <span class="line-deco"></span>
+        <span class="t-zh">偶像活動主辦 / 海外代理</span>
+        <span class="t-ja">アイドルイベント主催 / 海外エージェント</span>
+        <span class="t-en">idol events / overseas agency</span>
+      </div>
 
-  <section id="about">
-    <div class="about-visual">
-      <img src="https://seigura.com/wp-content/uploads/2023/12/MG_3664.jpg" alt="Aoki Hina">
+      <h1 class="reveal" data-delay="1">
+        Aoki Hina
+        <em>deserves</em>
+        <span class="small t-zh">——所以我們努力讓她坐商務艙。</span>
+        <span class="small t-ja">——だからビジネスクラスに乗せたい。</span>
+        <span class="small t-en">——so we're getting her into business class.</span>
+      </h1>
+      <div class="subfont-picker reveal" data-delay="1" id="subfontPicker" aria-label="字型">
+        <button data-sf="wenkai" class="active">霎鷄文楊</button>
+        <button data-sf="xiaowei">小娚</button>
+        <button data-sf="serif">明體</button>
+        <button data-sf="sans">黑體</button>
+      </div>
+
+      <p class="hero-tagline reveal" data-delay="2">
+        <span class="t-zh"><strong>AHDPB</strong> 是一間把「追星」當作任務去執行的小團隊。我們把偶像請來台灣，把粉絲帶去日本，處理你最在乎也最懶得處理的所有細節——從公演招致、遠征企劃到花牆與應援物。</span>
+        <span class="t-ja"><strong>AHDPB</strong> は「推し活」をミッションとして遂行する小さなチーム。アイドルを台湾に招致し、ファンを日本へ連れて行く。公演招致、遠征企画、フラスタ、応援グッズまで、あなたが本当に気にする細部を引き受けます。</span>
+        <span class="t-en"><strong>AHDPB</strong> is a tiny crew that treats "going to see your oshi" like a mission. We bring idols to Taiwan, we fly fans to Japan, and we handle every little detail you care about — booking, tours, flower stands, merch.</span>
+      </p>
+
+      <div class="hero-actions reveal" data-delay="3">
+        <a href="#contact" class="btn-primary">
+          <span class="t-zh">登機聯絡</span>
+          <span class="t-ja">搭乗手続き</span>
+          <span class="t-en">Board with us</span>
+          <span class="arrow">→</span>
+        </a>
+        <a href="#services" class="btn-ghost">
+          <span class="t-zh">服務項目 ↓</span>
+          <span class="t-ja">サービス ↓</span>
+          <span class="t-en">Services ↓</span>
+        </a>
+      </div>
     </div>
-    <div class="about-text-side reveal">
-      <h2>
-        <span class="lang-zh">關於我們</span>
-        <span class="lang-ja">私たちについて</span>
-        <span class="lang-en">About Us</span>
-      </h2>
-      <div class="section-desc">
-        <div class="lang-zh">
-          <p><strong>Aoki Hina Deserves Priority Boarding（AHDPB）</strong>是一家專注於偶像活動主辦與代理的團隊。</p>
-          <p>我們的目標很簡單——讓青木陽菜來台灣表演的時候，可以坐商務艙。</p>
-          <p>為了實現這個目標，我們全力投入偶像活動的企劃、海外代理與遠征團規劃，以最高規格的服務標準，為偶像文化搭建起跨越國境的橋樑。每一張門票、每一場活動、每一次應援，都是我們離這個夢想更近一步的證明。</p>
+
+    <!-- BOARDING PASS -->
+    <div class="pass reveal" data-delay="4" id="pass">
+      <div class="pass-head">
+        <span>Boarding Pass · AHDPB2026</span>
+        <span class="class">Business</span>
+      </div>
+      <div class="pass-body">
+        <div class="port">
+          <span class="code">TPE</span>
+          <span class="city">Taipei · Taiwan</span>
         </div>
-        <div class="lang-ja">
-          <p><strong>Aoki Hina Deserves Priority Boarding（AHDPB）</strong>は、アイドルイベントの主催とエージェント業務に特化したチームです。</p>
-          <p>私たちの目標はシンプルです——青木陽菜が台湾公演に来る時、ビジネスクラスに乗れるようにすること。</p>
-          <p>この目標を実現するため、アイドルイベントの企画、海外エージェント、遠征ツアーの企画に全力を注ぎ、最高水準のサービスでアイドル文化の国境を越える架け橋を築いています。一枚のチケット、一つのイベント、一つの応援が、この夢に近づく証です。</p>
+        <div class="plane-path">
+          <span class="icon">✈</span>
         </div>
-        <div class="lang-en">
-          <p><strong>Aoki Hina Deserves Priority Boarding (AHDPB)</strong> is a team dedicated to idol event production and agency services.</p>
-          <p>Our goal is simple — to make sure Aoki Hina flies business class when she comes to perform in Taiwan.</p>
-          <p>To achieve this dream, we pour everything into event planning, overseas agency work, and fan tour organization. With the highest standards of service, we build bridges across borders for idol culture. Every ticket sold, every event produced, every cheer echoed brings us one step closer to that dream.</p>
+        <div class="port right">
+          <span class="code">HND</span>
+          <span class="city">Tokyo · Japan</span>
+        </div>
+      </div>
+      <div class="pass-details">
+        <div class="cell"><span class="k">Flight</span><span class="v">AH 2026</span></div>
+        <div class="cell"><span class="k">Gate</span><span class="v">A · 03</span></div>
+        <div class="cell"><span class="k">Seat</span><span class="v">1A</span></div>
+        <div class="cell"><span class="k">Boarding</span><span class="v">ZONE 1</span></div>
+      </div>
+      <div class="pass-foot">
+        <div class="barcode" aria-hidden="true"></div>
+        <div class="pass-passenger">
+          <span>Passenger</span>
+          <strong>AOKI / HINA</strong>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="services">
-    <div class="services-text-side reveal">
-      <h2>
-        <span class="lang-zh">服務項目</span>
-        <span class="lang-ja">サービス</span>
-        <span class="lang-en">Our Services</span>
-      </h2>
-      <div class="slider">
+  <!-- ABOUT -->
+  <section id="about" data-screen-label="02 About">
+    <div class="about-copy">
+      <div class="section-head reveal">
+        <span class="section-num">[ 01 / About ]</span>
+        <h2><span class="t-zh">關於 <em>我們</em></span><span class="t-ja">私たちに <em>ついて</em></span><span class="t-en">About <em>the crew</em></span></h2>
+      </div>
+
+      <p class="lead reveal" data-delay="1">
+        <span class="t-zh">我們的目標很簡單——<em>讓青木陽菜來台灣表演的時候，可以坐商務艙。</em></span>
+        <span class="t-ja">私たちの目標はシンプル——<em>青木陽菜が台湾公演に来る時、ビジネスクラスに乗れるように。</em></span>
+        <span class="t-en">Our goal is simple — <em>get Aoki Hina into business class on her next Taiwan flight.</em></span>
+      </p>
+
+      <div class="reveal" data-delay="2">
+        <p lang-group="zh">
+          <strong>Aoki Hina Deserves Priority Boarding（AHDPB）</strong>是一支專注於偶像活動主辦與海外代理的小團隊。這個名字半是玩笑、半是宣言：我們真心相信好的偶像，值得被最好的方式對待——無論是 Gate 旁邊那杯熱咖啡、還是飛進來台北的那張機票。
+        </p>
+        <p lang-group="zh">
+          為了那個目標，我們把公演企劃、海外代理、遠征團、應援物資通通接了起來，用最高規格的服務標準，為偶像文化搭出一條跨越國境的短程航線。每一張門票、每一場活動、每一次應援，都是離艙門再近一步的證明。
+        </p>
+        <p lang-group="ja">
+          <strong>Aoki Hina Deserves Priority Boarding（AHDPB）</strong>は、アイドルイベント主催と海外エージェントに特化した小さなチームです。この名前は半分冗談、半分宣言——私たちは、良いアイドルは最高の形で扱われるべきだと本気で信じています。ゲート横の熱いコーヒーも、台北行きのあのチケットも。
+        </p>
+        <p lang-group="ja">
+          そのために、公演企画、海外エージェント、遠征ツアー、応援グッズまで全てを引き受け、最高水準のサービスでアイドル文化の短距離国際線を引いています。一枚のチケット、一つのイベント、一つの応援が、ゲートまで一歩近づく証です。
+        </p>
+        <p lang-group="en">
+          <strong>Aoki Hina Deserves Priority Boarding (AHDPB)</strong> is a small team dedicated to idol event production and overseas agency work. The name is half joke, half manifesto: we genuinely believe good idols deserve the best treatment — from the hot coffee by the gate to the ticket flying them into Taipei.
+        </p>
+        <p lang-group="en">
+          To get there, we tie together event planning, overseas agency, fan tours, and merchandise — a short-haul international route for idol culture, run to the highest service standard. Every ticket sold, every event produced, every cheer echoed is one step closer to the jet bridge.
+        </p>
+      </div>
+    </div>
+
+    <aside class="about-side reveal" data-delay="2" aria-label="Crew manifest">
+      <div class="about-visual">
+        <img src="https://seigura.com/wp-content/uploads/2023/12/MG_3664.jpg" alt="Aoki Hina">
+        <div class="stamp"><b>●</b> &nbsp;AOKI HINA &middot; ゲスト</div>
+      </div>
+      <div class="manifest">
+      <div class="manifest-head">
+        <span>Crew Manifest</span>
+        <span class="live">Live</span>
+      </div>
+      <div class="manifest-rows">
+        <div>
+          <span class="k">Callsign</span>
+          <span class="v">AHDPB · 2026</span>
+          <span class="badge">OPS</span>
+        </div>
+        <div>
+          <span class="k">Origin</span>
+          <span class="v">Taipei, TW</span>
+          <span class="badge">BASE</span>
+        </div>
+        <div>
+          <span class="k">Coverage</span>
+          <span class="v">JP ⇄ TW</span>
+          <span class="badge">INT'L</span>
+        </div>
+        <div>
+          <span class="k">Est.</span>
+          <span class="v">2026</span>
+          <span class="badge">NEW</span>
+        </div>
+        <div>
+          <span class="k">Mission</span>
+          <span class="v"><span class="t-zh">把她送上商務艙</span><span class="t-ja">ビジネスへ</span><span class="t-en">Business class</span></span>
+          <span class="badge">GOAL</span>
+        </div>
+        <div>
+          <span class="k">Status</span>
+          <span class="v"><span class="t-zh">登機中</span><span class="t-ja">搭乗中</span><span class="t-en">Boarding</span></span>
+          <span class="badge">●</span>
+        </div>
+      </div>
+      </div>
+    </aside>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" data-screen-label="03 Services">
+    <div class="section-head reveal">
+      <span class="section-num">[ 02 / Services ]</span>
+      <div>
+        <h2><span class="t-zh">三個 <em>登機區</em></span><span class="t-ja">三つの <em>搭乗ゾーン</em></span><span class="t-en">Three <em>boarding zones</em></span></h2>
+      </div>
+    </div>
+    <!-- SLIDER layout -->
+    <div class="services-slider reveal" data-delay="1">
+      <div class="slider-viewport">
         <div class="slider-track" id="sliderTrack">
-          <div class="slide">
-            <div class="icon">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+          <div class="slider-slide">
+            <div class="zone-visual">
+              <svg viewBox="0 0 400 400" preserveAspectRatio="none">
+                <rect width="400" height="400" fill="url(#g1)"/>
+                <rect width="400" height="400" fill="url(#dots1)"/>
+                <path d="M40,340 Q 200,40 360,340" fill="none" stroke="rgba(244,235,220,0.5)" stroke-width="1" stroke-dasharray="2 6"/>
+                <circle cx="40" cy="340" r="6" fill="var(--ink)"/>
+                <circle cx="360" cy="340" r="6" fill="var(--ink)"/>
+                <text x="50%" y="48%" text-anchor="middle" font-family="JetBrains Mono" font-size="14" fill="rgba(244,235,220,0.6)" letter-spacing="4">TPE → HND</text>
               </svg>
             </div>
-            <h3>
-              <span class="lang-zh">海外公演招致</span>
-              <span class="lang-ja">海外公演招致</span>
-              <span class="lang-en">Overseas Performance Booking</span>
-            </h3>
-            <p>
-              <span class="lang-zh">與日本事務所交涉，將偶像帶來台灣舉辦演唱會、見面會與特別活動。從企劃、場地到執行，我們一手包辦，讓每一場公演都值得被記住。</span>
-              <span class="lang-ja">日本の事務所と交渉し、アイドルを台湾に招致してコンサート、ファンミーティング、特別イベントを開催。企画から会場手配、運営まで一貫して対応します。</span>
-              <span class="lang-en">We negotiate with Japanese agencies to bring idols to Taiwan for concerts, fan meetings, and special events. From planning to venue to execution, we handle everything.</span>
-            </p>
+            <div>
+              <div style="font-family:var(--font-mono); font-size:0.7rem; letter-spacing:0.18em; color:var(--accent); margin-bottom:1rem; text-transform:uppercase;">Zone 01 · Priority · AH-01</div>
+              <h3>
+                <span class="t-zh"><em>招致</em>公演</span>
+                <span class="t-ja"><em>招致</em>公演</span>
+                <span class="t-en">Overseas <em>booking</em></span>
+              </h3>
+              <p>
+                <span class="t-zh">與日本事務所交涉，將偶像帶來台灣舉辦演唱會、見面會與特別活動。從企劃、場地到執行，我們一手包辦。</span>
+                <span class="t-ja">日本の事務所と交渉し、アイドルを台湾に招致してコンサート、ファンミ、特別イベントを開催。企画から運営まで一貫対応。</span>
+                <span class="t-en">We negotiate with Japanese agencies to bring idols to Taiwan for concerts, fan meetings, and specials — planning, venue, execution.</span>
+              </p>
+            </div>
           </div>
-          <div class="slide">
-            <div class="icon">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/>
+          <div class="slider-slide">
+            <div class="zone-visual">
+              <svg viewBox="0 0 400 400" preserveAspectRatio="none">
+                <rect width="400" height="400" fill="url(#g2)"/>
+                <rect width="400" height="400" fill="url(#stripes)"/>
+                <g fill="var(--accent)"><circle cx="80" cy="120" r="6"/><circle cx="200" cy="200" r="6"/><circle cx="320" cy="280" r="6"/></g>
+                <path d="M80,120 L200,200 L320,280" fill="none" stroke="var(--accent)" stroke-width="1" stroke-dasharray="3 5"/>
               </svg>
             </div>
-            <h3>
-              <span class="lang-zh">遠征應援團</span>
-              <span class="lang-ja">遠征応援ツアー</span>
-              <span class="lang-en">Fan Tour Expeditions</span>
-            </h3>
-            <p>
-              <span class="lang-zh">帶著粉絲飛往日本現場應援。門票搶購、交通住宿、應援物資，所有細節都幫你安排好，你只需要帶上你的熱情。</span>
-              <span class="lang-ja">ファンと一緒に日本の現場へ。チケット確保、交通・宿泊手配、応援グッズまで全てお任せ。あなたは情熱だけ持ってきてください。</span>
-              <span class="lang-en">We take fans to Japan for live events. Tickets, transport, accommodation, fan goods — we handle every detail. Just bring your passion.</span>
-            </p>
+            <div>
+              <div style="font-family:var(--font-mono); font-size:0.7rem; letter-spacing:0.18em; color:var(--accent); margin-bottom:1rem; text-transform:uppercase;">Zone 02 · Expedition · AH-02</div>
+              <h3>
+                <span class="t-zh"><em>遠征</em>應援團</span>
+                <span class="t-ja"><em>遠征</em>応援ツアー</span>
+                <span class="t-en">Fan <em>expeditions</em></span>
+              </h3>
+              <p>
+                <span class="t-zh">帶粉絲飛去日本現場應援。門票搶購、交通住宿、應援物資，所有細節都幫你安排好，你只需要帶上你的熱情。</span>
+                <span class="t-ja">ファンと一緒に日本の現場へ。チケット、交通、宿泊、グッズまで全てお任せ。情熱だけ持ってきてください。</span>
+                <span class="t-en">We take fans to Japan for lives. Tickets, transport, stay, fan goods — handled. Just bring your passion.</span>
+              </p>
+            </div>
           </div>
-          <div class="slide">
-            <div class="icon">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+          <div class="slider-slide">
+            <div class="zone-visual">
+              <svg viewBox="0 0 400 400" preserveAspectRatio="none">
+                <rect width="400" height="400" fill="url(#g3)"/>
+                <g fill="none" stroke="rgba(244,235,220,0.3)">
+                  <circle cx="200" cy="200" r="60"/>
+                  <circle cx="200" cy="200" r="100"/>
+                  <circle cx="200" cy="200" r="140"/>
+                  <circle cx="200" cy="200" r="180"/>
+                </g>
+                <circle cx="200" cy="200" r="10" fill="var(--accent)"/>
               </svg>
             </div>
-            <h3>
-              <span class="lang-zh">應援企劃與周邊</span>
-              <span class="lang-ja">応援企画＆グッズ</span>
-              <span class="lang-en">Fan Projects & Merchandise</span>
-            </h3>
-            <p>
-              <span class="lang-zh">設計製作限定應援周邊、策劃花牆與應援企劃，用最有溫度的方式傳遞粉絲的心意，讓偶像感受到來自海外的愛。</span>
-              <span class="lang-ja">限定応援グッズの制作、フラワースタンドや応援企画のプロデュース。心のこもった形で、海外ファンの想いをアイドルに届けます。</span>
-              <span class="lang-en">We create exclusive fan merchandise, flower walls, and fan projects — heartfelt ways to show idols the love from fans overseas.</span>
-            </p>
+            <div>
+              <div style="font-family:var(--font-mono); font-size:0.7rem; letter-spacing:0.18em; color:var(--accent); margin-bottom:1rem; text-transform:uppercase;">Zone 03 · Cargo · AH-03</div>
+              <h3>
+                <span class="t-zh"><em>應援</em>企劃與周邊</span>
+                <span class="t-ja"><em>応援</em>企画＆グッズ</span>
+                <span class="t-en">Projects <em>& merch</em></span>
+              </h3>
+              <p>
+                <span class="t-zh">設計製作限定應援周邊、策劃花牆與應援企劃，用最有溫度的方式傳遞粉絲的心意。</span>
+                <span class="t-ja">限定応援グッズの制作、フラワースタンドや応援企画のプロデュース。心のこもった形で想いを届けます。</span>
+                <span class="t-en">Exclusive fan merch, flower walls, and fan projects — heartfelt ways to show idols the love from overseas.</span>
+              </p>
+            </div>
           </div>
         </div>
       </div>
-      <div class="slider-controls">
-        <button class="slider-btn" onclick="moveSlide(-1)" aria-label="Previous slide">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-        </button>
-        <div class="slider-dots">
-          <button class="slider-dot active" onclick="goSlide(0)" aria-label="Go to slide 1"></button>
-          <button class="slider-dot" onclick="goSlide(1)" aria-label="Go to slide 2"></button>
-          <button class="slider-dot" onclick="goSlide(2)" aria-label="Go to slide 3"></button>
+      <div class="slider-nav">
+        <div class="slider-dots" id="sliderDots">
+          <button class="slider-dot active" data-i="0"></button>
+          <button class="slider-dot" data-i="1"></button>
+          <button class="slider-dot" data-i="2"></button>
         </div>
-        <button class="slider-btn" onclick="moveSlide(1)" aria-label="Next slide">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-      </div>
-    </div>
-    <div class="services-visual">
-      <img src="https://seigura.com/wp-content/uploads/2023/12/MG_3451.jpg" alt="Aoki Hina">
-    </div>
-  </section>
-
-  <section id="contact">
-    <div class="section-inner reveal">
-      <h2>
-        <span class="lang-zh">聯絡我們</span>
-        <span class="lang-ja">お問い合わせ</span>
-        <span class="lang-en">Contact Us</span>
-      </h2>
-      <p class="section-desc">
-        <span class="lang-zh">有任何活動合作或代理洽談需求，歡迎與我們聯繫。</span>
-        <span class="lang-ja">イベント協力やエージェント業務のご相談は、お気軽にお問い合わせください。</span>
-        <span class="lang-en">For event collaborations or agency inquiries, feel free to reach out.</span>
-      </p>
-      <div class="contact-cards">
-        <div class="contact-card">
-          <div class="contact-icon">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-              <polyline points="22,6 12,13 2,6" stroke="currentColor" stroke-width="1.5" fill="none"/>
-            </svg>
-          </div>
-          <h4>Email</h4>
-          <p><a href="mailto:gpwork4u@gmail.com">gpwork4u@gmail.com</a></p>
-        </div>
-        <div class="contact-card">
-          <div class="contact-icon">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-              <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.5" fill="none"/>
-            </svg>
-          </div>
-          <h4>
-            <span class="lang-zh">所在地</span>
-            <span class="lang-ja">所在地</span>
-            <span class="lang-en">Location</span>
-          </h4>
-          <p>
-            <span class="lang-zh">台灣</span>
-            <span class="lang-ja">台湾</span>
-            <span class="lang-en">Taiwan</span>
-          </p>
-        </div>
-        <div class="contact-card">
-          <div class="contact-icon">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" fill="none"/>
-              <polyline points="12 6 12 12 16 14" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <h4>
-            <span class="lang-zh">回覆時間</span>
-            <span class="lang-ja">返信時間</span>
-            <span class="lang-en">Response Time</span>
-          </h4>
-          <p>
-            <span class="lang-zh">24 小時內</span>
-            <span class="lang-ja">24時間以内</span>
-            <span class="lang-en">Within 24 hours</span>
-          </p>
+        <div class="slider-btns">
+          <button class="slider-btn" id="prevBtn" aria-label="Prev">←</button>
+          <button class="slider-btn" id="nextBtn" aria-label="Next">→</button>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- CONTACT -->
+  <section id="contact" data-screen-label="04 Contact">
+    <div class="section-head reveal">
+      <span class="section-num">[ 03 / Contact ]</span>
+      <h2><span class="t-zh">歡迎 <em>到登機門</em></span><span class="t-ja"><em>搭乗ゲート</em>でお待ちしています</span><span class="t-en">Meet us at <em>the gate</em></span></h2>
+    </div>
+    <div class="contact-grid">
+      <div class="reveal" data-delay="1">
+        <p class="contact-sub">
+          <span class="t-zh">活動合作、海外代理洽談、遠征團規劃、任何跟「把人（或心意）從 A 運到 B」有關的事——寫信給我們，Gate 這邊會回覆。</span>
+          <span class="t-ja">イベント協力、海外エージェント、遠征ツアー企画、「人（または想い）をAからBへ運ぶ」ことなら何でも——メールください。ゲートから返信します。</span>
+          <span class="t-en">Event collabs, overseas agency inquiries, fan tour planning, anything about moving people (or feelings) from A to B — drop us a line, the gate will reply.</span>
+        </p>
+      </div>
+
+      <div class="gate-card reveal" data-delay="2">
+        <div class="gate-card-head">
+          <span>Gate · Ops</span>
+          <span class="status-ok">Open</span>
+        </div>
+        <div class="gate-card-body">
+          <div class="label">Direct Channel</div>
+          <a href="/cdn-cgi/l/email-protection#224552554d5049165762454f434b4e0c414d4f"><span class="__cf_email__" data-cfemail="95f2e5e2fae7fea1e0d5f2f8f4fcf9bbf6faf8">[email&#160;protected]</span></a>
+        </div>
+        <div class="gate-card-foot">
+          <div>
+            <span class="k">Response</span>
+            <span class="v">≤ 48h</span>
+          </div>
+          <div>
+            <span class="k">Language</span>
+            <span class="v">中 · 日 · EN</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
   <footer>
-    <div class="footer-inner">
-      <nav class="footer-nav" aria-label="Footer navigation">
-        <a href="#about">
-          <span class="lang-zh">關於我們</span>
-          <span class="lang-ja">私たちについて</span>
-          <span class="lang-en">About</span>
-        </a>
-        <a href="#services">
-          <span class="lang-zh">服務項目</span>
-          <span class="lang-ja">サービス</span>
-          <span class="lang-en">Services</span>
-        </a>
-        <a href="#contact">
-          <span class="lang-zh">聯絡</span>
-          <span class="lang-ja">お問い合わせ</span>
-          <span class="lang-en">Contact</span>
-        </a>
-      </nav>
-      <p>&copy; 2026 Aoki Hina Deserves Priority Boarding. All rights reserved.</p>
-      <p>
-        <span class="lang-zh">本站圖片僅供展示用途，如有侵權疑慮，請來信 <a href="mailto:gpwork4u@gmail.com" style="color:var(--warm-light)">gpwork4u@gmail.com</a> 通知，將立即下架處理。</span>
-        <span class="lang-ja">本サイトの画像は展示目的のみに使用しています。著作権に関するお問い合わせは <a href="mailto:gpwork4u@gmail.com" style="color:var(--warm-light)">gpwork4u@gmail.com</a> までご連絡ください。速やかに対応いたします。</span>
-        <span class="lang-en">Images on this site are for display purposes only. If you have any copyright concerns, please contact <a href="mailto:gpwork4u@gmail.com" style="color:var(--warm-light)">gpwork4u@gmail.com</a> and we will remove them immediately.</span>
-      </p>
+    <div>
+      <div style="color:var(--ink); font-weight:600; margin-bottom:0.3rem;">AHDPB · Flight 2026</div>
+      © 2026 Aoki Hina Deserves Priority Boarding.
     </div>
+    <div style="text-align:center;">
+      TPE ←→ HND · EST. 2026
+    </div>
+    <div class="right">
+      <span class="t-zh">All rights reserved.</span>
+      <span class="t-ja">All rights reserved.</span>
+      <span class="t-en">All rights reserved.</span>
+    </div>
+    <p class="disclaim">
+      <span class="t-zh">本站為粉絲自主應援企劃，與本人及所屬事務所無官方關聯。所有圖像為示意用佔位元素。若有任何疑慮，歡迎來信 <a href="/cdn-cgi/l/email-protection#1f786f68706d742b6a5f78727e7673317c7072"><span class="__cf_email__" data-cfemail="dfb8afa8b0adb4ebaa9fb8b2beb6b3f1bcb0b2">[email&#160;protected]</span></a>。</span>
+      <span class="t-ja">本サイトはファン有志による応援企画であり、ご本人および所属事務所とは公式な関係はありません。すべての画像はプレースホルダーです。ご質問は <a href="/cdn-cgi/l/email-protection#284f585f475a431c5d684f45494144064b4745"><span class="__cf_email__" data-cfemail="7c1b0c0b130e1748093c1b111d1510521f1311">[email&#160;protected]</span></a> まで。</span>
+      <span class="t-en">This is an independent fan project with no official affiliation to the artist or their agency. All visuals are placeholder elements. Questions: <a href="/cdn-cgi/l/email-protection#7611060119041d420336111b171f1a5815191b"><span class="__cf_email__" data-cfemail="e38493948c9188d796a3848e828a8fcd808c8e">[email&#160;protected]</span></a>.</span>
+    </p>
   </footer>
 
-  <script>
-    function switchLang(lang) {
-      document.body.setAttribute('data-i18n', lang);
-      document.querySelectorAll('.lang-switch button').forEach(btn => {
-        btn.classList.toggle('active', btn.textContent.includes(
-          lang === 'zh' ? '中文' : lang === 'ja' ? '日本語' : 'EN'
-        ));
-      });
-    }
+</div><!-- /wrap -->
 
-    let currentSlide = 0;
-    const totalSlides = 3;
+<!-- TWEAKS PANEL -->
+<div class="tweaks-panel" id="tweaksPanel">
+  <h4>Tweaks <button class="close" id="tweaksClose" aria-label="close">×</button></h4>
+  <div class="tweak-row">
+    <label>Accent</label>
+    <div class="swatches" id="swatches">
+      <button data-accent="amber" style="background:#E8A76C"></button>
+      <button data-accent="sakura" style="background:#F0A3B5"></button>
+      <button data-accent="mint" style="background:#8FD6B5"></button>
+      <button data-accent="sky" style="background:#7DB1E8"></button>
+      <button data-accent="violet" style="background:#B196E8"></button>
+    </div>
+  </div>
+</div>
 
-    function updateSlider() {
-      document.getElementById('sliderTrack').style.transform = `translateX(-${currentSlide * 100}%)`;
-      document.querySelectorAll('.slider-dot').forEach((dot, i) => {
-        dot.classList.toggle('active', i === currentSlide);
-      });
-    }
-
-    function moveSlide(dir) {
-      currentSlide = (currentSlide + dir + totalSlides) % totalSlides;
-      updateSlider();
-    }
-
-    function goSlide(i) {
-      currentSlide = i;
-      updateSlider();
-    }
-
-    // Auto-advance slider, pause on hover
-    let autoSlide = setInterval(() => moveSlide(1), 5000);
-    const sliderEl = document.querySelector('.slider');
-    sliderEl.addEventListener('mouseenter', () => clearInterval(autoSlide));
-    sliderEl.addEventListener('mouseleave', () => {
-      autoSlide = setInterval(() => moveSlide(1), 5000);
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js" defer></script><script>
+(function(){
+  /*=== LANG ===*/
+  const body = document.body;
+  document.querySelectorAll('.lang-switch button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const lang = btn.dataset.lang;
+      body.setAttribute('data-i18n', lang);
+      document.querySelectorAll('.lang-switch button').forEach(b => b.classList.toggle('active', b === btn));
+      try { localStorage.setItem('ahdpb:lang', lang); } catch(e){}
     });
+  });
+  try {
+    const saved = localStorage.getItem('ahdpb:lang');
+    if (saved) {
+      body.setAttribute('data-i18n', saved);
+      document.querySelectorAll('.lang-switch button').forEach(b => b.classList.toggle('active', b.dataset.lang === saved));
+    }
+  } catch(e){}
 
-    // Nav scroll effect
-    window.addEventListener('scroll', () => {
-      document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 50);
-    }, { passive: true });
+  /*=== BARCODE ===*/
+  (function(){
+    const bar = document.querySelector('.barcode');
+    if (!bar) return;
+    let html = '';
+    for (let i=0; i<44; i++){
+      const w = 1 + Math.round(Math.random()*3);
+      html += `<span style="width:${w}px; height:100%;"></span>`;
+    }
+    bar.innerHTML = html;
+  })();
 
-    // Scroll reveal
-    const revealEls = document.querySelectorAll('.reveal');
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15 });
-    revealEls.forEach(el => revealObserver.observe(el));
-  </script>
+  /*=== REVEAL ON SCROLL ===*/
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /*=== PARALLAX ===*/
+  const pass = document.getElementById('pass');
+  function onScroll(){
+    const y = window.scrollY;
+    if (pass) {
+      pass.style.transform = `rotate(${2.5 - y*0.006}deg) translateY(${y * -0.08}px)`;
+    }
+    const meta = document.querySelector('.hero-meta');
+    if (meta) meta.style.transform = `translateY(${y * 0.2}px)`;
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  /*=== SUBFONT PICKER ===*/
+  document.querySelectorAll('#subfontPicker button').forEach(b => {
+    b.addEventListener('click', () => {
+      document.body.setAttribute('data-subfont', b.dataset.sf);
+      document.querySelectorAll('#subfontPicker button').forEach(x => x.classList.toggle('active', x === b));
+      try { localStorage.setItem('ahdpb:subfont', b.dataset.sf); } catch(e){}
+    });
+  });
+  try {
+    const sf = localStorage.getItem('ahdpb:subfont');
+    if (sf) {
+      document.body.setAttribute('data-subfont', sf);
+      document.querySelectorAll('#subfontPicker button').forEach(x => x.classList.toggle('active', x.dataset.sf === sf));
+    }
+  } catch(e){}
+
+  /*=== SERVICES (slider only) ===*/
+
+  /*=== SLIDER ===*/
+  let cur = 0;
+  const total = 3;
+  const track = document.getElementById('sliderTrack');
+  function updateSlider(){
+    if (!track) return;
+    track.style.transform = `translateX(-${cur*100}%)`;
+    document.querySelectorAll('.slider-dot').forEach((d,i) => d.classList.toggle('active', i === cur));
+  }
+  document.getElementById('prevBtn')?.addEventListener('click', () => { cur = (cur - 1 + total) % total; updateSlider(); });
+  document.getElementById('nextBtn')?.addEventListener('click', () => { cur = (cur + 1) % total; updateSlider(); });
+  document.querySelectorAll('.slider-dot').forEach(d => d.addEventListener('click', () => { cur = +d.dataset.i; updateSlider(); }));
+
+  /*=== ACCENT SWATCHES ===*/
+  const ACCENTS = {
+    amber:  { hex: '#E8A76C', dark: '#0B1420' },
+    sakura: { hex: '#F0A3B5', dark: '#0B1420' },
+    mint:   { hex: '#8FD6B5', dark: '#0B1420' },
+    sky:    { hex: '#7DB1E8', dark: '#0B1420' },
+    violet: { hex: '#B196E8', dark: '#0B1420' },
+  };
+  function setAccent(name){
+    const a = ACCENTS[name] || ACCENTS.amber;
+    document.documentElement.style.setProperty('--accent', a.hex);
+    document.querySelectorAll('#swatches button').forEach(b => b.classList.toggle('active', b.dataset.accent === name));
+    try { localStorage.setItem('ahdpb:accent', name); } catch(e){}
+    window.__currentAccent = name;
+  }
+  document.querySelectorAll('#swatches button').forEach(b => b.addEventListener('click', () => setAccent(b.dataset.accent)));
+  try {
+    const savedA = localStorage.getItem('ahdpb:accent') || TWEAK_DEFAULTS.accent;
+    setAccent(savedA);
+  } catch(e){ setAccent('amber'); }
+
+  /*=== TWEAKS EDIT MODE ===*/
+  const panel = document.getElementById('tweaksPanel');
+  window.addEventListener('message', ev => {
+    const d = ev.data || {};
+    if (d.type === '__activate_edit_mode') panel.classList.add('on');
+    if (d.type === '__deactivate_edit_mode') panel.classList.remove('on');
+  });
+  document.getElementById('tweaksClose')?.addEventListener('click', () => {
+    panel.classList.remove('on');
+    window.parent.postMessage({ type: '__edit_mode_deactivated' }, '*');
+  });
+  // persist changes
+  document.querySelectorAll('#swatches button').forEach(b => b.addEventListener('click', () => {
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { accent: b.dataset.accent } }, '*');
+  }));
+  // announce last
+  window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+})();
+</script>
 
 </body>
 </html>

@@ -21,7 +21,7 @@
     }
 
     body {
-      font-family: "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
+      font-family: "Helvetica Neue", Arial, "Noto Sans TC", "Noto Sans JP", sans-serif;
       color: #333;
       line-height: 1.6;
       background: var(--primary);
@@ -50,6 +50,12 @@
 
     nav .logo span { color: var(--warm); }
 
+    nav .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
     nav ul {
       list-style: none;
       display: flex;
@@ -64,6 +70,34 @@
     }
 
     nav a:hover { color: var(--warm-light); }
+
+    .lang-switch {
+      display: flex;
+      gap: 0.25rem;
+    }
+
+    .lang-switch button {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.6);
+      padding: 0.3rem 0.6rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      border-radius: 4px;
+    }
+
+    .lang-switch button:hover {
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+    }
+
+    .lang-switch button.active {
+      background: var(--warm);
+      border-color: var(--warm);
+      color: #fff;
+    }
 
     /* Hero */
     .hero {
@@ -160,7 +194,7 @@
       filter: brightness(0.95) contrast(1.05);
     }
 
-    /* Services - dark theme continuing from hero */
+    /* Services */
     #services {
       background: linear-gradient(180deg, #1a3350 0%, var(--primary) 100%);
       padding: 5rem 3rem;
@@ -341,32 +375,6 @@
       font-weight: 600;
     }
 
-    .contact-links {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-
-    .contact-links a {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.7rem 1.5rem;
-      border: 2px solid rgba(255,255,255,0.2);
-      border-radius: 50px;
-      color: rgba(255,255,255,0.8);
-      text-decoration: none;
-      font-weight: 600;
-      transition: all 0.2s;
-    }
-
-    .contact-links a:hover {
-      background: var(--warm);
-      border-color: var(--warm);
-      color: #fff;
-    }
-
     /* Footer */
     footer {
       text-align: center;
@@ -375,6 +383,18 @@
       color: rgba(255,255,255,0.35);
       font-size: 0.85rem;
     }
+
+    /* i18n */
+    [data-i18n] .lang-zh,
+    [data-i18n] .lang-ja,
+    [data-i18n] .lang-en { display: none; }
+    [data-i18n="zh"] .lang-zh { display: block; }
+    [data-i18n="ja"] .lang-ja { display: block; }
+    [data-i18n="en"] .lang-en { display: block; }
+    span.lang-zh, span.lang-ja, span.lang-en { display: none !important; }
+    [data-i18n="zh"] span.lang-zh { display: inline !important; }
+    [data-i18n="ja"] span.lang-ja { display: inline !important; }
+    [data-i18n="en"] span.lang-en { display: inline !important; }
 
     /* Responsive */
     @media (max-width: 768px) {
@@ -387,7 +407,6 @@
       #services, #about, #contact { padding: 4rem 1.5rem; }
       .services-grid { grid-template-columns: 1fr; }
       .about-content { grid-template-columns: 1fr; }
-      .contact-links { flex-direction: column; align-items: center; }
     }
 
     @media (min-width: 769px) and (max-width: 1024px) {
@@ -395,22 +414,49 @@
     }
   </style>
 </head>
-<body>
+<body data-i18n="zh">
 
   <nav>
     <a href="#" class="logo">AHDPB<span>.</span></a>
-    <ul>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
+    <div class="nav-right">
+      <ul>
+        <li><a href="#services">
+          <span class="lang-zh">Services</span>
+          <span class="lang-ja">Services</span>
+          <span class="lang-en">Services</span>
+        </a></li>
+        <li><a href="#about">
+          <span class="lang-zh">About</span>
+          <span class="lang-ja">About</span>
+          <span class="lang-en">About</span>
+        </a></li>
+        <li><a href="#contact">
+          <span class="lang-zh">Contact</span>
+          <span class="lang-ja">Contact</span>
+          <span class="lang-en">Contact</span>
+        </a></li>
+      </ul>
+      <div class="lang-switch">
+        <button class="active" onclick="switchLang('zh')">中文</button>
+        <button onclick="switchLang('ja')">日本語</button>
+        <button onclick="switchLang('en')">EN</button>
+      </div>
+    </div>
   </nav>
 
   <section class="hero">
     <div class="hero-text">
       <h1>Aoki Hina Deserves<span>Priority Boarding</span></h1>
-      <p class="tagline">偶像活動主辦 ・ 海外代理 ・ 粉絲體驗策劃</p>
-      <a href="#contact" class="cta">聯絡我們</a>
+      <p class="tagline">
+        <span class="lang-zh">偶像活動主辦 ・ 海外代理 ・ 粉絲體驗策劃</span>
+        <span class="lang-ja">アイドルイベント主催 ・ 海外エージェント ・ ファン体験プロデュース</span>
+        <span class="lang-en">Idol Event Production ・ Overseas Agency ・ Fan Experience Planning</span>
+      </p>
+      <a href="#contact" class="cta">
+        <span class="lang-zh">聯絡我們</span>
+        <span class="lang-ja">お問い合わせ</span>
+        <span class="lang-en">Contact Us</span>
+      </a>
     </div>
     <div class="hero-visual">
       <img src="https://seigura.com/wp-content/uploads/2023/12/MG_3514.jpg" alt="Aoki Hina">
@@ -420,37 +466,89 @@
   <section id="services">
     <div class="section-inner">
       <h2>Our Services</h2>
-      <p class="section-desc">我們專注於偶像活動的企劃、主辦與海外代理，為粉絲打造最頂級的應援體驗。</p>
+      <p class="section-desc">
+        <span class="lang-zh">我們專注於偶像活動的企劃、主辦與海外代理，為粉絲打造最頂級的應援體驗。</span>
+        <span class="lang-ja">アイドルイベントの企画・主催・海外エージェントに特化し、ファンに最高の応援体験を提供します。</span>
+        <span class="lang-en">We specialize in idol event planning, hosting, and overseas agency, delivering premium fan experiences.</span>
+      </p>
       <div class="services-grid">
         <div class="service-card">
           <div class="icon">🎤</div>
-          <h3>活動主辦</h3>
-          <p>從演唱會、見面會到粉絲祭典，提供完整的活動企劃與執行服務。</p>
+          <h3>
+            <span class="lang-zh">活動主辦</span>
+            <span class="lang-ja">イベント主催</span>
+            <span class="lang-en">Event Production</span>
+          </h3>
+          <p>
+            <span class="lang-zh">從演唱會、見面會到粉絲祭典，提供完整的活動企劃與執行服務。</span>
+            <span class="lang-ja">コンサート、ファンミーティング、ファン祭りまで、企画から運営まで一貫サービス。</span>
+            <span class="lang-en">From concerts and fan meetings to fan festivals, full event planning and execution.</span>
+          </p>
         </div>
         <div class="service-card">
           <div class="icon">🌏</div>
-          <h3>海外代理</h3>
-          <p>將日本最熱門的偶像文化帶到台灣及亞洲各地。</p>
+          <h3>
+            <span class="lang-zh">海外代理</span>
+            <span class="lang-ja">海外エージェント</span>
+            <span class="lang-en">Overseas Agency</span>
+          </h3>
+          <p>
+            <span class="lang-zh">將日本最熱門的偶像文化帶到台灣及亞洲各地。</span>
+            <span class="lang-ja">日本で最も人気のあるアイドル文化を台湾やアジア各地へ届けます。</span>
+            <span class="lang-en">Bringing Japan's hottest idol culture to Taiwan and across Asia.</span>
+          </p>
         </div>
         <div class="service-card">
           <div class="icon">✈️</div>
-          <h3>遠征團企劃</h3>
-          <p>規劃完整的海外應援遠征行程，門票代購、交通住宿一站搞定。</p>
+          <h3>
+            <span class="lang-zh">遠征團企劃</span>
+            <span class="lang-ja">遠征ツアー企画</span>
+            <span class="lang-en">Fan Tour Planning</span>
+          </h3>
+          <p>
+            <span class="lang-zh">規劃完整的海外應援遠征行程，門票代購、交通住宿一站搞定。</span>
+            <span class="lang-ja">チケット代行購入、交通・宿泊手配を含む海外遠征ツアーの企画。</span>
+            <span class="lang-en">Complete overseas fan tour packages with tickets, transport, and accommodation.</span>
+          </p>
         </div>
         <div class="service-card">
           <div class="icon">🎨</div>
-          <h3>周邊企劃製作</h3>
-          <p>為活動量身打造高品質限定周邊商品。</p>
+          <h3>
+            <span class="lang-zh">周邊企劃製作</span>
+            <span class="lang-ja">グッズ企画制作</span>
+            <span class="lang-en">Merchandise Production</span>
+          </h3>
+          <p>
+            <span class="lang-zh">為活動量身打造高品質限定周邊商品。</span>
+            <span class="lang-ja">イベント限定の高品質オリジナルグッズを制作。</span>
+            <span class="lang-en">Custom high-quality exclusive merchandise for events.</span>
+          </p>
         </div>
         <div class="service-card">
           <div class="icon">📱</div>
-          <h3>社群經營</h3>
-          <p>偶像與粉絲社群的經營管理，建立緊密的互動連結。</p>
+          <h3>
+            <span class="lang-zh">社群經營</span>
+            <span class="lang-ja">SNS運営</span>
+            <span class="lang-en">Community Management</span>
+          </h3>
+          <p>
+            <span class="lang-zh">偶像與粉絲社群的經營管理，建立緊密的互動連結。</span>
+            <span class="lang-ja">アイドルとファンコミュニティの運営管理、密接な交流の構築。</span>
+            <span class="lang-en">Managing idol-fan communities and building strong engagement.</span>
+          </p>
         </div>
         <div class="service-card">
           <div class="icon">🤝</div>
-          <h3>商業合作媒合</h3>
-          <p>媒合偶像與品牌的商業合作，從代言到聯名企劃。</p>
+          <h3>
+            <span class="lang-zh">商業合作媒合</span>
+            <span class="lang-ja">ビジネスマッチング</span>
+            <span class="lang-en">Business Matching</span>
+          </h3>
+          <p>
+            <span class="lang-zh">媒合偶像與品牌的商業合作，從代言到聯名企劃。</span>
+            <span class="lang-ja">アイドルとブランドのビジネスコラボ、エンドースメントからコラボ企画まで。</span>
+            <span class="lang-en">Matching idols with brands for endorsements and collaborations.</span>
+          </p>
         </div>
       </div>
     </div>
@@ -459,29 +557,61 @@
   <section id="about">
     <div class="section-inner">
       <h2>About Us</h2>
-      <p class="section-desc">以熱情驅動，用專業實現，讓每一場偶像活動都值得 Priority Boarding。</p>
+      <p class="section-desc">
+        <span class="lang-zh">以熱情驅動，用專業實現，讓每一場偶像活動都值得 Priority Boarding。</span>
+        <span class="lang-ja">情熱で駆動し、プロフェッショナルで実現する。すべてのアイドルイベントにPriority Boardingを。</span>
+        <span class="lang-en">Driven by passion, delivered with professionalism. Every idol event deserves Priority Boarding.</span>
+      </p>
       <div class="about-content">
         <div class="about-text">
-          <p><strong>Aoki Hina Deserves Priority Boarding（AHDPB）</strong>是一家專注於偶像活動主辦與代理的團隊。我們相信，每一位偶像與每一位粉絲都值得最好的體驗。</p>
-          <p>從活動企劃、海外代理到遠征團規劃，我們以最高規格的服務標準，為偶像文化搭建起跨越國境的橋樑。</p>
-          <p>無論是將海外偶像帶來台灣，或是帶著粉絲飛向世界各地的現場，我們都全力以赴，只為那份感動能準時登機。</p>
+          <div class="lang-zh">
+            <p><strong>Aoki Hina Deserves Priority Boarding（AHDPB）</strong>是一家專注於偶像活動主辦與代理的團隊。</p>
+            <p>我們的目標很簡單——讓青木陽菜來台灣表演的時候，可以坐商務艙。</p>
+            <p>為了實現這個目標，我們全力投入偶像活動的企劃、海外代理與遠征團規劃，以最高規格的服務標準，為偶像文化搭建起跨越國境的橋樑。每一張門票、每一場活動、每一次應援，都是我們離這個夢想更近一步的證明。</p>
+          </div>
+          <div class="lang-ja">
+            <p><strong>Aoki Hina Deserves Priority Boarding（AHDPB）</strong>は、アイドルイベントの主催とエージェント業務に特化したチームです。</p>
+            <p>私たちの目標はシンプルです——青木陽菜が台湾公演に来る時、ビジネスクラスに乗れるようにすること。</p>
+            <p>この目標を実現するため、アイドルイベントの企画、海外エージェント、遠征ツアーの企画に全力を注ぎ、最高水準のサービスでアイドル文化の国境を越える架け橋を築いています。一枚のチケット、一つのイベント、一つの応援が、この夢に近づく証です。</p>
+          </div>
+          <div class="lang-en">
+            <p><strong>Aoki Hina Deserves Priority Boarding (AHDPB)</strong> is a team dedicated to idol event production and agency services.</p>
+            <p>Our goal is simple — to make sure Aoki Hina flies business class when she comes to perform in Taiwan.</p>
+            <p>To achieve this dream, we pour everything into event planning, overseas agency work, and fan tour organization. With the highest standards of service, we build bridges across borders for idol culture. Every ticket sold, every event produced, every cheer echoed brings us one step closer to that dream.</p>
+          </div>
         </div>
         <div class="about-stats">
           <div class="stat">
             <div class="number">50+</div>
-            <div class="label">場活動主辦</div>
+            <div class="label">
+              <span class="lang-zh">場活動主辦</span>
+              <span class="lang-ja">イベント主催</span>
+              <span class="lang-en">Events Hosted</span>
+            </div>
           </div>
           <div class="stat">
             <div class="number">10K+</div>
-            <div class="label">服務粉絲人次</div>
+            <div class="label">
+              <span class="lang-zh">服務粉絲人次</span>
+              <span class="lang-ja">ファン動員数</span>
+              <span class="lang-en">Fans Served</span>
+            </div>
           </div>
           <div class="stat">
             <div class="number">8</div>
-            <div class="label">合作國家地區</div>
+            <div class="label">
+              <span class="lang-zh">合作國家地區</span>
+              <span class="lang-ja">提携国・地域</span>
+              <span class="lang-en">Regions Covered</span>
+            </div>
           </div>
           <div class="stat">
             <div class="number">100%</div>
-            <div class="label">熱情投入</div>
+            <div class="label">
+              <span class="lang-zh">熱情投入</span>
+              <span class="lang-ja">情熱全開</span>
+              <span class="lang-en">Passion Driven</span>
+            </div>
           </div>
         </div>
       </div>
@@ -491,7 +621,11 @@
   <section id="contact">
     <div class="section-inner">
       <h2>Contact Us</h2>
-      <p class="section-desc">有任何活動合作或代理洽談需求，歡迎與我們聯繫。</p>
+      <p class="section-desc">
+        <span class="lang-zh">有任何活動合作或代理洽談需求，歡迎與我們聯繫。</span>
+        <span class="lang-ja">イベント協力やエージェント業務のご相談は、お気軽にお問い合わせください。</span>
+        <span class="lang-en">For event collaborations or agency inquiries, feel free to reach out.</span>
+      </p>
       <div class="contact-info">
         <p>Email: <a href="mailto:gpwork4u@gmail.com">gpwork4u@gmail.com</a></p>
       </div>
@@ -501,6 +635,17 @@
   <footer>
     <p>&copy; 2026 Aoki Hina Deserves Priority Boarding. All rights reserved.</p>
   </footer>
+
+  <script>
+    function switchLang(lang) {
+      document.body.setAttribute('data-i18n', lang);
+      document.querySelectorAll('.lang-switch button').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent.includes(
+          lang === 'zh' ? '中文' : lang === 'ja' ? '日本語' : 'EN'
+        ));
+      });
+    }
+  </script>
 
 </body>
 </html>

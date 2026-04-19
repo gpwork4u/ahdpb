@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aoki Hina Deserves Priority Boarding</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary: #1a1a2e;
+      --accent: #e94560;
+      --accent2: #0f3460;
+      --gold: #f5c518;
+      --light: #f8f8f8;
+    }
+
+    body {
+      font-family: "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent2) 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 50%, rgba(233,69,96,0.15) 0%, transparent 60%),
+                  radial-gradient(circle at 70% 30%, rgba(245,197,24,0.1) 0%, transparent 50%);
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.5rem;
+      position: relative;
+    }
+
+    .hero h1 span {
+      color: var(--gold);
+    }
+
+    .hero .tagline {
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      opacity: 0.9;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .hero .cta {
+      display: inline-block;
+      padding: 0.9rem 2.5rem;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+    }
+
+    .hero .cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(233,69,96,0.4);
+    }
+
+    /* Nav */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      background: rgba(26,26,46,0.85);
+      backdrop-filter: blur(10px);
+    }
+
+    nav .logo {
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    nav .logo span { color: var(--gold); }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--gold); }
+
+    /* Sections */
+    section {
+      padding: 5rem 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    section h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+      text-align: center;
+    }
+
+    section h2::after {
+      content: "";
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: var(--accent);
+      margin: 0.8rem auto 0;
+      border-radius: 2px;
+    }
+
+    .section-desc {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 3rem;
+      color: #666;
+    }
+
+    /* Services */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .service-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      transition: transform 0.2s;
+    }
+
+    .service-card:hover { transform: translateY(-4px); }
+
+    .service-card .icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .service-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+
+    .service-card p { color: #666; font-size: 0.95rem; }
+
+    /* About */
+    #about { background: var(--light); padding: 5rem 2rem; max-width: none; }
+    #about > div { max-width: 1000px; margin: 0 auto; }
+
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .about-text p { margin-bottom: 1rem; color: #555; }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .stat {
+      text-align: center;
+      padding: 1.5rem;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+
+    .stat .number {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .stat .label { font-size: 0.85rem; color: #888; margin-top: 0.3rem; }
+
+    /* Contact */
+    .contact-info {
+      text-align: center;
+    }
+
+    .contact-info p {
+      margin-bottom: 0.8rem;
+      color: #555;
+    }
+
+    .contact-info a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .contact-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.5rem;
+      border: 2px solid var(--accent2);
+      border-radius: 50px;
+      color: var(--accent2);
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .contact-links a:hover {
+      background: var(--accent2);
+      color: #fff;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: var(--primary);
+      color: rgba(255,255,255,0.5);
+      font-size: 0.85rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav ul { display: none; }
+      .about-content { grid-template-columns: 1fr; }
+      .contact-links { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#" class="logo">AHdpb<span>.</span></a>
+    <ul>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <h1>Aoki Hina Deserves<br><span>Priority Boarding</span></h1>
+    <p class="tagline">偶像活動主辦 ・ 海外代理 ・ 粉絲體驗策劃</p>
+    <a href="#contact" class="cta">聯絡我們</a>
+  </section>
+
+  <section id="services">
+    <h2>Our Services</h2>
+    <p class="section-desc">我們專注於偶像活動的企劃、主辦與海外代理，為粉絲打造最頂級的應援體驗。</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="icon">🎤</div>
+        <h3>活動主辦</h3>
+        <p>從演唱會、見面會到粉絲祭典，我們提供完整的活動企劃與執行服務，打造難忘的現場體驗。</p>
+      </div>
+      <div class="service-card">
+        <div class="icon">🌏</div>
+        <h3>海外代理</h3>
+        <p>作為偶像活動的海外代理，我們將日本最熱門的偶像文化帶到台灣及亞洲各地。</p>
+      </div>
+      <div class="service-card">
+        <div class="icon">✈️</div>
+        <h3>遠征團企劃</h3>
+        <p>規劃完整的海外應援遠征行程，包含門票代購、交通住宿安排，讓你輕鬆追星無煩惱。</p>
+      </div>
+      <div class="service-card">
+        <div class="icon">🎨</div>
+        <h3>周邊企劃製作</h3>
+        <p>從設計到生產，為活動量身打造高品質限定周邊商品，提升粉絲收藏價值。</p>
+      </div>
+      <div class="service-card">
+        <div class="icon">📱</div>
+        <h3>社群經營</h3>
+        <p>協助偶像與粉絲社群的經營管理，建立緊密的互動連結與品牌形象。</p>
+      </div>
+      <div class="service-card">
+        <div class="icon">🤝</div>
+        <h3>商業合作媒合</h3>
+        <p>媒合偶像與品牌的商業合作機會，從代言到聯名企劃，創造雙贏價值。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div>
+      <h2>About Us</h2>
+      <p class="section-desc">以熱情驅動，用專業實現，讓每一場偶像活動都值得 Priority Boarding。</p>
+      <div class="about-content">
+        <div class="about-text">
+          <p><strong>Aoki Hina Deserves Priority Boarding（AHDPB）</strong>是一家專注於偶像活動主辦與代理的團隊。我們相信，每一位偶像與每一位粉絲都值得最好的體驗。</p>
+          <p>從活動企劃、海外代理到遠征團規劃，我們以最高規格的服務標準，為偶像文化搭建起跨越國境的橋樑。</p>
+          <p>無論是將海外偶像帶來台灣，或是帶著粉絲飛向世界各地的現場，我們都全力以赴，只為那份感動能準時登機。</p>
+        </div>
+        <div class="about-stats">
+          <div class="stat">
+            <div class="number">50+</div>
+            <div class="label">場活動主辦</div>
+          </div>
+          <div class="stat">
+            <div class="number">10K+</div>
+            <div class="label">服務粉絲人次</div>
+          </div>
+          <div class="stat">
+            <div class="number">8</div>
+            <div class="label">合作國家地區</div>
+          </div>
+          <div class="stat">
+            <div class="number">100%</div>
+            <div class="label">熱情投入</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p class="section-desc">有任何活動合作、代理洽談或遠征團需求，歡迎隨時與我們聯繫。</p>
+    <div class="contact-info">
+      <p>Email: <a href="mailto:hello@ahdpb.com">hello@ahdpb.com</a></p>
+      <div class="contact-links">
+        <a href="#">𝕏 Twitter</a>
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Aoki Hina Deserves Priority Boarding. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
